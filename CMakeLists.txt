@@ -5,7 +5,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules/
 
 find_package(SFML 2 COMPONENTS system window graphics)
 
-set(SRC main.cpp)
+set(SRC src/main.cpp src/Entity.cpp src/Entity.h src/PlayerCar.cpp src/PlayerCar.h)
 
 include_directories(${SFML_INCLUDE_DIR})
 
@@ -15,4 +15,4 @@ add_executable(road_fighter ${SRC})
 
 target_link_libraries(road_fighter ${SFML_LIBRARIES})
 
-install(TARGETS road_fighter DESTINATION ${PROJECT_SOURCE_DIR}/bin)
+install(TARGETS road_fighter DESTINATION bin)
