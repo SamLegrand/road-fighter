@@ -17,7 +17,7 @@ before_install:
 - travis_retry wget -qO- https://cmake.org/files/v3.12/cmake-3.12.1-Linux-x86_64.tar.gz | sudo tar --strip-components=1 -C cmake-dist -xz 
 - export PATH=$PWD/cmake-dist/bin:$PATH;
 - mkdir sfml-dist
-- travis_retry wget -qo- http://www.sfml-dev.org/files/SFML-2.3-linux-gcc-64-bit.tar.gz | sudo tar --strip-components=1 -C sfml-dist -xz
+- travis_retry wget -qO- https://www.sfml-dev.org/files/SFML-2.3-linux-gcc-64-bit.tar.gz | sudo tar --strip-components=1 -C sfml-dist -xz
 - export PATH=$PWD/sfml-dist/:$PATH;
 
 
