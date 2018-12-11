@@ -18,7 +18,7 @@ namespace road_fighter {
          * @brief Function that returns the instance of the Transformation singleton
          * @return instance of Transformation singleton
          */
-        static shared_ptr<Transformation> getInstance();
+        static Transformation& getInstance();
         Transformation(Transformation const&) = delete;
         void operator=(Transformation const&)  = delete;
         void setResolution(const unsigned int& width, const unsigned int& height);
@@ -27,7 +27,6 @@ namespace road_fighter {
 
     private:
         Transformation() : width(0), height(0) {};
-        static shared_ptr<Transformation> instance;
         unsigned int width;
         unsigned int height;
     };

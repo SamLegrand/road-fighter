@@ -18,7 +18,7 @@ namespace road_fighter {
          * @brief Function that returns the instance of the Random singleton
          * @return instance of Random singleton
          */
-        static shared_ptr<Random> getInstance();
+        Random& getInstance();
 
         // Make sure no copies or assignments are valid
         Random(Random const&) = delete;
@@ -34,7 +34,6 @@ namespace road_fighter {
 
     private:
         Random() = default;
-        static shared_ptr<Random> instance;
     };
 }
 

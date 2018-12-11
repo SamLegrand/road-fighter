@@ -6,10 +6,8 @@
 
 using namespace road_fighter;
 
-shared_ptr<Transformation> Transformation::getInstance() {
-    if (instance == nullptr) {
-        instance = make_shared<Transformation>(instance);
-    }
+Transformation& Transformation::getInstance() {
+    static Transformation instance;
     return instance;
 }
 
