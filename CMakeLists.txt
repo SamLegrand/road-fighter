@@ -5,7 +5,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/Modules/
 
 find_package(SFML 2 COMPONENTS system window graphics)
 
-set(SRC src/main.cpp src/Entity.cpp src/Entity.h src/PlayerCar.cpp src/PlayerCar.h src/RacingCar.cpp src/RacingCar.h src/PassableCar.cpp src/PassableCar.h src/World.cpp src/World.h src/Bullet.cpp src/Bullet.h src/Random.cpp src/Random.h src/Transformation.cpp src/Transformation.h)
+set(SRC src/road_fighter/main.cpp src/road_fighter/Entity.cpp src/road_fighter/Entity.h src/road_fighter/PlayerCar.cpp src/road_fighter/PlayerCar.h src/road_fighter/RacingCar.cpp src/road_fighter/RacingCar.h src/road_fighter/PassableCar.cpp src/road_fighter/PassableCar.h src/road_fighter/World.cpp src/road_fighter/World.h src/road_fighter/Bullet.cpp src/road_fighter/Bullet.h src/road_fighter/Random.cpp src/road_fighter/Random.h src/road_fighter/Transformation.cpp src/road_fighter/Transformation.h)
 
 include_directories(${SFML_INCLUDE_DIR})
 

@@ -4,6 +4,8 @@
 
 #include "Random.h"
 
+using namespace road_fighter;
+
 shared_ptr<Random> Random::getInstance() {
     if (instance == nullptr) {
         instance = make_shared<Random>();

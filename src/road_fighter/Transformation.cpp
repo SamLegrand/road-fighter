@@ -4,6 +4,8 @@
 
 #include "Transformation.h"
 
+using namespace road_fighter;
+
 shared_ptr<Transformation> Transformation::getInstance() {
     if (instance == nullptr) {
         instance = make_shared<Transformation>(instance);
