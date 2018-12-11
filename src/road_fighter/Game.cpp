@@ -3,3 +3,5 @@
 //
 
 #include "Game.h"
+
+using namespace road_fighter;

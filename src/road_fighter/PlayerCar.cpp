@@ -3,3 +3,9 @@
 //
 
 #include "PlayerCar.h"
+
+using namespace road_fighter;
+
+PlayerCar::PlayerCar() : Entity() {
+
+}

@@ -16,12 +16,17 @@ using namespace std;
 namespace road_fighter {
     class World : public Entity {
     public:
-        void addObserver(shared_ptr<Observer> observer);
-        void removeObserver(shared_ptr<Observer> observer);
+        // Observer functions
+        void addObserver(const shared_ptr<Observer>& observer);
+        void removeObserver(const shared_ptr<Observer>& observer);
         void notifyObservers();
+
+        void addEntity(const unique_ptr<Entity>& entity);
+        void removeEntity(const unique_ptr<Entity>& entity);
 
     private:
         vector<shared_ptr<Observer>> observers;
+        vector<unique_ptr<Entity>> entities;
     };
 }
 
