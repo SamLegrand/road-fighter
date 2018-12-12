@@ -14,6 +14,7 @@ namespace road_fighter {
     public:
         Game();
         Game(shared_ptr<EntityFactory>& factory);
+        void drawEntities();
 
     private:
         shared_ptr<EntityFactory> factory;

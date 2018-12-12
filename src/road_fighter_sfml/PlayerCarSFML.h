@@ -10,6 +10,7 @@
 #include <iostream>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 using namespace std;
 
@@ -17,11 +18,13 @@ namespace road_fighter_SFML {
     class PlayerCarSFML : public road_fighter::PlayerCar {
     public:
         PlayerCarSFML();
-        void draw(sf::RenderWindow& window);
+        PlayerCarSFML(const shared_ptr<sf::RenderWindow>& w);
+        void draw() override;
 
     private:
         sf::Texture texture;
         sf::Sprite sprite;
+        shared_ptr<sf::RenderWindow> window;
     };
 }
 

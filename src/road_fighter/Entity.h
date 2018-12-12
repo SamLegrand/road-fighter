@@ -9,6 +9,7 @@ namespace road_fighter {
     class Entity {
     public:
         Entity();
+        virtual void draw() = 0;
         Entity(const double& x, const double& y);
         void updatePos(const double& x, const double& y);
         double getXPos() const;

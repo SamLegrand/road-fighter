@@ -9,7 +9,7 @@
 
 namespace road_fighter_SFML {
     class BulletSFML : public road_fighter::Bullet {
-
+        void draw() override {};
     };
 }
 

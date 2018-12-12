@@ -28,3 +28,9 @@ void World::addEntity(unique_ptr<road_fighter::Entity> entity) {
 void World::removeEntity(const unique_ptr<road_fighter::Entity> &entity) {
     entities.erase(std::remove(entities.begin(), entities.end(), entity), entities.end());
 }
+
+void World::draw() {
+    for (const unique_ptr<Entity>& e : entities) {
+        e->draw();
+    }
+}

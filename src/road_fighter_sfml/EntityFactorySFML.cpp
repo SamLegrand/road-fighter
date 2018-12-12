@@ -6,8 +6,10 @@
 
 using namespace road_fighter_SFML;
 
+EntityFactorySFML::EntityFactorySFML(const shared_ptr<sf::RenderWindow> &w) : window(w) {};
+
 unique_ptr<road_fighter::PlayerCar> EntityFactorySFML::createPlayerCar() {
-    return make_unique<PlayerCarSFML>();
+    return make_unique<PlayerCarSFML>(window);
 }
 
 unique_ptr<road_fighter::Bullet> EntityFactorySFML::createBullet() {

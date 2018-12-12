@@ -9,7 +9,7 @@
 
 namespace road_fighter_SFML {
     class PassableCarSFML : public road_fighter::PassableCar {
-
+        void draw() override {};
     };
 }
 

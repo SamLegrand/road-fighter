@@ -24,6 +24,8 @@ namespace road_fighter {
         void addEntity(unique_ptr<Entity> entity);
         void removeEntity(const unique_ptr<Entity>& entity);
 
+        void draw() override;
+
     private:
         vector<shared_ptr<Observer>> observers;
         vector<unique_ptr<Entity>> entities;

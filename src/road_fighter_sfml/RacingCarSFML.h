@@ -9,7 +9,7 @@
 
 namespace road_fighter_SFML {
     class RacingCarSFML : public road_fighter::RacingCar {
-
+        void draw() override {};
     };
 }
 
