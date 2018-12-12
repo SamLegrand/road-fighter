@@ -34,3 +34,9 @@ void World::draw() {
         e->draw();
     }
 }
+
+void World::handleInput() {
+    for (const unique_ptr<Entity>& e : entities) {
+        e->handleInput();
+    }
+}

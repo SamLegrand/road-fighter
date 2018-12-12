@@ -13,23 +13,31 @@ PlayerCar::PlayerCar() : Entity() {
 void PlayerCar::moveLeft(const double &speed) {
     double x = getXPos();
     double y = getYPos();
-    updatePos(x - speed, y);
+    if (x - speed > -3) {
+        updatePos(x - speed, y);
+    }
 }
 
 void PlayerCar::moveRight(const double &speed) {
     double x = getXPos();
     double y = getYPos();
-    updatePos(x + speed, y);
+    if (x + speed < 3) {
+        updatePos(x + speed, y);
+    }
 }
 
 void PlayerCar::moveUp(const double &speed) {
     double x = getXPos();
     double y = getYPos();
-    updatePos(x, y + speed);
+    if (y + speed < 4) {
+        updatePos(x, y + speed);
+    }
 }
 
 void PlayerCar::moveDown(const double &speed) {
     double x = getXPos();
     double y = getYPos();
-    updatePos(x, y - speed);
+    if (y - speed > -4) {
+        updatePos(x, y - speed);
+    }
 }

@@ -20,6 +20,7 @@ namespace road_fighter_SFML {
         PlayerCarSFML();
         PlayerCarSFML(const shared_ptr<sf::RenderWindow>& w);
         void draw() override;
+        void handleInput() override;
 
     private:
         sf::Texture texture;

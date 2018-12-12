@@ -33,3 +33,21 @@ void Transformation::convertToWorldSpace(double &x, double &y) {
         cerr << "Invalid y-coordinate: " << y << endl;
     }
 }
+
+void Transformation::convertToResolution(double &x, double &y) {
+    if (width == 0 || height == 0) {
+        cerr << "Resolution has not been set." << endl;
+    }
+    if (x >= -4 && x <= 4) {
+        x = (x + 4)/8 * width;
+    }
+    else {
+        cerr << "Invalid x-coordinate: " << x << endl;
+    }
+    if (y >= -3 && y <= 3) {
+        y = (y + 3)/6 * height;
+    }
+    else {
+        cerr << "Invalid y-coordinate: " << y << endl;
+    }
+}

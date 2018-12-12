@@ -13,3 +13,7 @@ Game::Game(shared_ptr<EntityFactory> &f) : factory(f), world(make_unique<World>(
 void Game::drawEntities() {
     world->draw();
 }
+
+void Game::handleInput() {
+    world->handleInput();
+}

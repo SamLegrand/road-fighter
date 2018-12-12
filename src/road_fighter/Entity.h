@@ -5,11 +5,14 @@
 #ifndef ROAD_FIGHTER_ENTITY_H
 #define ROAD_FIGHTER_ENTITY_H
 
+#include "Transformation.h"
+
 namespace road_fighter {
     class Entity {
     public:
         Entity();
         virtual void draw() = 0;
+        virtual void handleInput() = 0;
         Entity(const double& x, const double& y);
         void updatePos(const double& x, const double& y);
         double getXPos() const;
