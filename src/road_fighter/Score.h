@@ -8,7 +8,7 @@
 #include "Observer.h"
 
 namespace road_fighter {
-    class Score : Observer {
+    class Score : public Observer {
         void update() final;
     };
 }
