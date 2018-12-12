@@ -8,6 +8,8 @@
 namespace road_fighter {
     class Entity {
     public:
+        Entity();
+        Entity(const double& x, const double& y);
         void updatePos(const double& x, const double& y);
         double getXPos() const;
         double getYPos() const;
