@@ -21,7 +21,7 @@ namespace road_fighter {
         void removeObserver(const shared_ptr<Observer>& observer);
         void notifyObservers();
 
-        void addEntity(const unique_ptr<Entity>& entity);
+        void addEntity(unique_ptr<Entity> entity);
         void removeEntity(const unique_ptr<Entity>& entity);
 
     private:

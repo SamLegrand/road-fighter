@@ -21,8 +21,8 @@ void World::notifyObservers() {
     }
 }
 
-void World::addEntity(const unique_ptr<road_fighter::Entity>& entity) {
-    entities.emplace_back(entity);
+void World::addEntity(unique_ptr<road_fighter::Entity> entity) {
+    entities.emplace_back(move(entity));
 }
 
 void World::removeEntity(const unique_ptr<road_fighter::Entity> &entity) {
