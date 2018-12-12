@@ -7,13 +7,16 @@
 
 #include "World.h"
 #include "PlayerCar.h"
+#include "EntityFactory.h"
 
 namespace road_fighter {
     class Game {
     public:
         Game();
+        Game(shared_ptr<EntityFactory>& factory);
 
     private:
+        shared_ptr<EntityFactory> factory;
         unique_ptr<World> world;
     };
 }
