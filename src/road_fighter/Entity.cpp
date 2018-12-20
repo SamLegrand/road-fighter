@@ -8,7 +8,7 @@ using namespace road_fighter;
 
 Entity::Entity() : xPos(0), yPos(0) {}
 
-Entity::Entity(const double &x, const double &y) : xPos(x), yPos(y) {}
+Entity::Entity(const double& w, const double& h) : xPos(0), yPos(0), width(w), height(h) {}
 
 void Entity::updatePos(const double &x, const double &y) {
     xPos = x;

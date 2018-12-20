@@ -16,7 +16,15 @@ PlayerCarSFML::PlayerCarSFML() : PlayerCar(), texture(sf::Texture()), sprite(sf:
 void PlayerCarSFML::draw() {
     double x = xPos;
     double y = yPos;
-    road_fighter::Transformation::getInstance().convertToResolution(x, y);
+    double w = width;
+    double h = height;
+    road_fighter::Transformation::getInstance().convertCoordinatesToResolution(x, y);
+    road_fighter::Transformation::getInstance().convertDimensionsToResolution(w, h);
+//    sf::Vector2f newSize(static_cast<float>(w), static_cast<float>(h));
+    sf::Vector2u oldSize = sprite.getTexture()->getSize();
+    cout << oldSize.x << endl;
+    cout << oldSize.y << endl;
+    sprite.setScale(static_cast<float>(w)/static_cast<float>(oldSize.x), static_cast<float>(h)/static_cast<float>(oldSize.y));
     sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
     window->draw(sprite);
 }

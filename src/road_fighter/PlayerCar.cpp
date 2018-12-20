@@ -6,7 +6,7 @@
 
 using namespace road_fighter;
 
-PlayerCar::PlayerCar() : Entity() {
+PlayerCar::PlayerCar() : Entity(0.3, 0.6) {
 
 }
 
@@ -21,7 +21,7 @@ void PlayerCar::moveLeft(const double &speed) {
 void PlayerCar::moveRight(const double &speed) {
     double x = getXPos();
     double y = getYPos();
-    if (x + speed < 4) {
+    if (x + speed + width < 4) {
         updatePos(x + speed, y);
     }
 }
@@ -29,7 +29,7 @@ void PlayerCar::moveRight(const double &speed) {
 void PlayerCar::moveUp(const double &speed) {
     double x = getXPos();
     double y = getYPos();
-    if (y + speed < 3) {
+    if (y + speed + height < 3) {
         updatePos(x, y + speed);
     }
 }
