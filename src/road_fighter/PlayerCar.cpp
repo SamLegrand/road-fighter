@@ -29,15 +29,15 @@ void PlayerCar::moveRight(const double &speed) {
 void PlayerCar::moveUp(const double &speed) {
     double x = getXPos();
     double y = getYPos();
-    if (y + speed + height < 3) {
-        updatePos(x, y + speed);
+    if (y - speed > -3) {
+        updatePos(x, y - speed);
     }
 }
 
 void PlayerCar::moveDown(const double &speed) {
     double x = getXPos();
     double y = getYPos();
-    if (y - speed > -3) {
-        updatePos(x, y - speed);
+    if (y + speed + height < 3) {
+        updatePos(x, y + speed);
     }
 }
