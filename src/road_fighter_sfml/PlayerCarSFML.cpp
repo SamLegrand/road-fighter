@@ -7,7 +7,7 @@
 using namespace road_fighter_SFML;
 
 PlayerCarSFML::PlayerCarSFML() : PlayerCar(), texture(sf::Texture()), sprite(sf::Sprite()) {
-    if (!texture.loadFromFile("../graphics/temp.png")) {
+    if (!texture.loadFromFile("../graphics/PlayerCar.png")) {
         cerr << "Loading texture for PlayerCar failed." << endl;
     }
     sprite.setTexture(texture);
@@ -32,16 +32,24 @@ PlayerCarSFML::PlayerCarSFML(const shared_ptr<sf::RenderWindow>& w) : PlayerCarS
 }
 
 void PlayerCarSFML::handleInput() {
+    bool movementPressed = false;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         moveLeft(0.0001);
+        movementPressed = true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         moveRight(0.0001);
+        movementPressed = true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         moveUp(0.0001);
+        movementPressed = true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         moveDown(0.0001);
+        movementPressed = true;
+    }
+    if (!movementPressed) {
+        setNotMoving();
     }
 }

@@ -9,7 +9,7 @@
 
 namespace road_fighter {
     class PassableCar : public Entity {
-
+        void handleMovement() override {};
     };
 }
 

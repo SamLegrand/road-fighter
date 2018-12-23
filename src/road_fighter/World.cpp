@@ -40,3 +40,9 @@ void World::handleInput() {
         e->handleInput();
     }
 }
+
+void World::handleMovement() {
+    for (const unique_ptr<Entity>& e : entities) {
+        e->handleMovement();
+    }
+}

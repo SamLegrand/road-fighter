@@ -9,7 +9,7 @@
 
 namespace road_fighter {
     class RacingCar : public Entity {
-
+        void handleMovement() override {};
     };
 }
 

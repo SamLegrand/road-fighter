@@ -13,6 +13,7 @@ namespace road_fighter {
         Entity();
         virtual void draw() = 0;
         virtual void handleInput() = 0;
+        virtual void handleMovement() = 0;
         Entity(const double& width, const double& height);
         void updatePos(const double& x, const double& y);
         double getXPos() const;

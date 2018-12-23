@@ -16,6 +16,7 @@ namespace road_fighter {
         Game(shared_ptr<EntityFactory>& factory);
         void drawEntities();
         void handleInput();
+        void handleMovement();
 
     private:
         shared_ptr<EntityFactory> factory;

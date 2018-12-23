@@ -9,7 +9,7 @@
 
 namespace road_fighter {
     class Bullet : public Entity {
-
+        void handleMovement() override {};
     };
 }
 

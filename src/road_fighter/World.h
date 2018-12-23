@@ -26,6 +26,7 @@ namespace road_fighter {
 
         void draw() override;
         void handleInput() override;
+        void handleMovement() override;
 
     private:
         vector<shared_ptr<Observer>> observers;

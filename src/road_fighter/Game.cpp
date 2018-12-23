@@ -17,3 +17,7 @@ void Game::drawEntities() {
 void Game::handleInput() {
     world->handleInput();
 }
+
+void Game::handleMovement() {
+    world->handleMovement();
+}
