@@ -16,13 +16,16 @@ namespace road_fighter {
         void moveUp(const double& speed);
         void moveDown(const double& speed);
         void handleMovement() override;
-        void setNotMoving();
+
 
 
     private:
         double speedX;
         double speedY;
-        bool notMoving;
+        double prevSpeedX;
+        double prevSpeedY;
+        bool notMovingX;
+        bool notMovingY;
     };
 }
 

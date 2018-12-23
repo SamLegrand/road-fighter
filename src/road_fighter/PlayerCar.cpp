@@ -27,40 +27,46 @@ void PlayerCar::handleMovement() {
     else {
         speedY = 0;
     }
-    if (notMoving) {
+    if (prevSpeedX == speedX) {
+        notMovingX = true;
+    }
+    if (prevSpeedY == speedY) {
+        notMovingY = true;
+    }
+    if (notMovingX) {
         speedX *= 0.9998;
+    }
+    if (notMovingY) {
         speedY *= 0.9999;
     }
+    prevSpeedX = speedX;
+    prevSpeedY = speedY;
 }
 
 void PlayerCar::moveLeft(const double &speed) {
-    notMoving = false;
+    notMovingX = false;
     if (speedX >= -0.00012) {
         speedX -= 0.00000002;
     }
 }
 
 void PlayerCar::moveRight(const double &speed) {
-    notMoving = false;
+    notMovingX = false;
     if (speedX <= 0.00012) {
         speedX += 0.00000002;
     }
 }
 
 void PlayerCar::moveUp(const double &speed) {
-    notMoving = false;
+    notMovingY = false;
     if (speedY >= -0.00012) {
         speedY -= 0.00000002;
     }
 }
 
 void PlayerCar::moveDown(const double &speed) {
-    notMoving = false;
+    notMovingY = false;
     if (speedY <= 0) {
         speedY += 0.00000001;
     }
-}
-
-void PlayerCar::setNotMoving() {
-    notMoving = true;
 }

@@ -32,24 +32,16 @@ PlayerCarSFML::PlayerCarSFML(const shared_ptr<sf::RenderWindow>& w) : PlayerCarS
 }
 
 void PlayerCarSFML::handleInput() {
-    bool movementPressed = false;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         moveLeft(0.0001);
-        movementPressed = true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         moveRight(0.0001);
-        movementPressed = true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         moveUp(0.0001);
-        movementPressed = true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         moveDown(0.0001);
-        movementPressed = true;
-    }
-    if (!movementPressed) {
-        setNotMoving();
     }
 }
