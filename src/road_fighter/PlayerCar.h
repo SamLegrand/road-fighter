@@ -11,10 +11,10 @@ namespace road_fighter {
     class PlayerCar : public Entity {
     public:
         PlayerCar();
-        void moveLeft(const double& speed);
-        void moveRight(const double& speed);
-        void moveUp(const double& speed);
-        void moveDown(const double& speed);
+        void moveLeft();
+        void moveRight();
+        void moveUp();
+        void moveDown();
         void handleMovement() override;
 
 

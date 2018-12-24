@@ -33,15 +33,15 @@ PlayerCarSFML::PlayerCarSFML(const shared_ptr<sf::RenderWindow>& w) : PlayerCarS
 
 void PlayerCarSFML::handleInput() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        moveLeft(0.0001);
+        moveLeft();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        moveRight(0.0001);
+        moveRight();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        moveUp(0.0001);
+        moveUp();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        moveDown(0.0001);
+        moveDown();
     }
 }

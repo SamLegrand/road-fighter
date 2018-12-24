@@ -24,6 +24,8 @@ namespace road_fighter {
         double yPos;
         double width;
         double height;
+        double leftBound;
+        double rightBound;
     };
 }
 

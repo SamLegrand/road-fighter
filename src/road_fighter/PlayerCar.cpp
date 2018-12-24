@@ -14,25 +14,25 @@ PlayerCar::PlayerCar() : Entity(0.4, 0.8) {
 void PlayerCar::handleMovement() {
     double x = getXPos();
     double y = getYPos();
-    if (x + speedX > -4 && x + speedX + width < 4) {
+    if (x + speedX > leftBound && x + speedX + width < rightBound) {
         updatePos(x + speedX, y);
     }
     else {
-        speedX = 0;
+        speedX = -speedX/2;
     }
     x = getXPos();
-    if  (y + speedY > -3 && y + speedY + height < 3) {
-        updatePos(x, y + speedY);
-    }
-    else {
-        speedY = 0;
-    }
+//    if  (y + speedY > -3 && y + speedY + height < 3) {
+//        updatePos(x, y + speedY);
+//    }
+//    else {
+//        speedY = 0;
+//    }
     if (prevSpeedX == speedX) {
         notMovingX = true;
     }
-    if (prevSpeedY == speedY) {
-        notMovingY = true;
-    }
+//    if (prevSpeedY == speedY) {
+//        notMovingY = true;
+//    }
     if (notMovingX) {
         speedX *= 0.9998;
     }
@@ -43,28 +43,28 @@ void PlayerCar::handleMovement() {
     prevSpeedY = speedY;
 }
 
-void PlayerCar::moveLeft(const double &speed) {
+void PlayerCar::moveLeft() {
     notMovingX = false;
     if (speedX >= -0.00012) {
         speedX -= 0.00000002;
     }
 }
 
-void PlayerCar::moveRight(const double &speed) {
+void PlayerCar::moveRight() {
     notMovingX = false;
     if (speedX <= 0.00012) {
         speedX += 0.00000002;
     }
 }
 
-void PlayerCar::moveUp(const double &speed) {
+void PlayerCar::moveUp() {
     notMovingY = false;
     if (speedY >= -0.00012) {
         speedY -= 0.00000002;
     }
 }
 
-void PlayerCar::moveDown(const double &speed) {
+void PlayerCar::moveDown() {
     notMovingY = false;
     if (speedY <= 0) {
         speedY += 0.00000001;
