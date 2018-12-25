@@ -8,6 +8,7 @@
 #include "World.h"
 #include "PlayerCar.h"
 #include "EntityFactory.h"
+#include "Random.h"
 
 namespace road_fighter {
     class Game {
@@ -17,6 +18,7 @@ namespace road_fighter {
         void drawEntities();
         void handleInput();
         void handleMovement();
+        void spawnPassableCar();
 
     private:
         shared_ptr<EntityFactory> factory;

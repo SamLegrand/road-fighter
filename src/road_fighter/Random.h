@@ -18,7 +18,7 @@ namespace road_fighter {
          * @brief Function that returns the instance of the Random singleton
          * @return instance of Random singleton
          */
-        Random& getInstance();
+        static Random& getInstance();
 
         // Make sure no copies or assignments are valid
         Random(Random const&) = delete;

@@ -24,5 +24,5 @@ double Entity::getYPos() const {
 }
 
 void Entity::scroll() {
-    yPos += 0.00015;
+    yPos += 0.04;
 }

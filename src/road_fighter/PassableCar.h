@@ -9,7 +9,11 @@
 
 namespace road_fighter {
     class PassableCar : public Entity {
+    public:
+        PassableCar(const double& width, const double& height, const string& type);
         void handleMovement() override {};
+    private:
+        string type;
     };
 }
 

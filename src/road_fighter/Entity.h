@@ -6,6 +6,7 @@
 #define ROAD_FIGHTER_ENTITY_H
 
 #include "Transformation.h"
+#include "Random.h"
 
 namespace road_fighter {
     class Entity {

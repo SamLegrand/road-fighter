@@ -34,10 +34,10 @@ void PlayerCar::handleMovement() {
 //        notMovingY = true;
 //    }
     if (notMovingX) {
-        speedX *= 0.9998;
+        speedX *= 0.93;
     }
     if (notMovingY) {
-        speedY *= 0.9999;
+        speedY *= 0.93;
     }
     prevSpeedX = speedX;
     prevSpeedY = speedY;
@@ -45,15 +45,15 @@ void PlayerCar::handleMovement() {
 
 void PlayerCar::moveLeft() {
     notMovingX = false;
-    if (speedX >= -0.00012) {
-        speedX -= 0.00000002;
+    if (speedX >= -0.04) {
+        speedX -= 0.002;
     }
 }
 
 void PlayerCar::moveRight() {
     notMovingX = false;
-    if (speedX <= 0.00012) {
-        speedX += 0.00000002;
+    if (speedX <= 0.04) {
+        speedX += 0.002;
     }
 }
 

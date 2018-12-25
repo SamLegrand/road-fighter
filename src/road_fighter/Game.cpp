@@ -21,3 +21,10 @@ void Game::handleInput() {
 void Game::handleMovement() {
     world->handleMovement();
 }
+
+void Game::spawnPassableCar() {
+    double rnd = Random::getInstance().getRandom(0, 1);
+    if (rnd < 1/300.0) {
+        world->addEntity(factory->createPassableCar());
+    }
+}
