@@ -6,6 +6,11 @@
 
 using namespace road_fighter;
 
+World::World() : Entity(8, 6) {
+    xPos = -4;
+    yPos = -3;
+}
+
 void World::addObserver(const shared_ptr<Observer>& observer) {
     observers.emplace_back(observer);
 }
@@ -30,19 +35,34 @@ void World::removeEntity(const unique_ptr<road_fighter::Entity> &entity) {
 }
 
 void World::draw() {
+    drawSelf();
+    player->draw();
     for (const unique_ptr<Entity>& e : entities) {
         e->draw();
     }
 }
 
-void World::handleInput() {
+void World::handleInputEntities() {
+    player->handleInput();
     for (const unique_ptr<Entity>& e : entities) {
         e->handleInput();
     }
 }
 
 void World::handleMovement() {
+    player->handleMovement();
     for (const unique_ptr<Entity>& e : entities) {
         e->handleMovement();
     }
+}
+
+void World::scrollWorld() {
+    for (const unique_ptr<Entity>& e : entities) {
+        e->scroll();
+    }
+    scroll();
+}
+
+void World::setPlayer(unique_ptr<road_fighter::Entity> entity) {
+    player = move(entity);
 }

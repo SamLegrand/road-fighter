@@ -23,3 +23,7 @@ unique_ptr<road_fighter::PassableCar> EntityFactorySFML::createPassableCar() {
 unique_ptr<road_fighter::RacingCar> EntityFactorySFML::createRacingCar() {
     return make_unique<RacingCarSFML>();
 }
+
+unique_ptr<road_fighter::World> EntityFactorySFML::createWorld() {
+    return make_unique<WorldSFML>(window);
+}

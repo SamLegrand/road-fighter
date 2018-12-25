@@ -19,6 +19,7 @@ namespace road_fighter {
         virtual unique_ptr<PassableCar> createPassableCar() = 0;
         virtual unique_ptr<PlayerCar> createPlayerCar() = 0;
         virtual unique_ptr<RacingCar> createRacingCar() = 0;
+        virtual unique_ptr<World> createWorld() = 0;
     };
 }
 

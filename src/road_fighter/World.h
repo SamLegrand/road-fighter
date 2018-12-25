@@ -16,6 +16,8 @@ using namespace std;
 namespace road_fighter {
     class World : public Entity {
     public:
+        World();
+
         // Observer functions
         void addObserver(const shared_ptr<Observer>& observer);
         void removeObserver(const shared_ptr<Observer>& observer);
@@ -23,14 +25,19 @@ namespace road_fighter {
 
         void addEntity(unique_ptr<Entity> entity);
         void removeEntity(const unique_ptr<Entity>& entity);
+        void setPlayer(unique_ptr<Entity> entity);
 
         void draw() override;
-        void handleInput() override;
         void handleMovement() override;
+        void scrollWorld();
+        void handleInputEntities();
+
+        virtual void drawSelf() = 0;
 
     private:
         vector<shared_ptr<Observer>> observers;
         vector<unique_ptr<Entity>> entities;
+        unique_ptr<Entity> player;
     };
 }
 

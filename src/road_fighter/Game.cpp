@@ -6,8 +6,8 @@
 
 using namespace road_fighter;
 
-Game::Game(shared_ptr<EntityFactory> &f) : factory(f), world(make_unique<World>()) {
-    world->addEntity(factory->createPlayerCar());
+Game::Game(shared_ptr<EntityFactory> &f) : factory(f), world(factory->createWorld()) {
+    world->setPlayer(factory->createPlayerCar());
 }
 
 void Game::drawEntities() {

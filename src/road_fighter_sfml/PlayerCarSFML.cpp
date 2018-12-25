@@ -13,7 +13,7 @@ PlayerCarSFML::PlayerCarSFML() : PlayerCar(), texture(sf::Texture()), sprite(sf:
     sprite.setTexture(texture);
     double w = width;
     double h = height;
-    road_fighter::Transformation::getInstance().convertDimensionsToResolution(w, h);
+    road_fighter::Transformation::getInstance().dimensionsToRes(w, h);
     sf::Vector2f newSize(static_cast<float>(w), static_cast<float>(h));
     sf::Vector2f oldSize = static_cast<sf::Vector2f>(sprite.getTexture()->getSize());
     sprite.setScale(newSize.x/oldSize.x, newSize.y/oldSize.y);
@@ -22,7 +22,7 @@ PlayerCarSFML::PlayerCarSFML() : PlayerCar(), texture(sf::Texture()), sprite(sf:
 void PlayerCarSFML::draw() {
     double x = xPos;
     double y = yPos;
-    road_fighter::Transformation::getInstance().convertCoordinatesToResolution(x, y);
+    road_fighter::Transformation::getInstance().coordinatesToRes(x, y);
     sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
     window->draw(sprite);
 }
