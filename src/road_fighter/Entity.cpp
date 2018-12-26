@@ -23,6 +23,6 @@ double Entity::getYPos() const {
     return yPos;
 }
 
-void Entity::scroll() {
-    yPos += 0.05;
+void Entity::scroll(const double& speed) {
+    yPos -= speed;
 }

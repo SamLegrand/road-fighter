@@ -39,10 +39,3 @@ void WorldSFML::drawSelf() {
     window->draw(roadSprite1);
     window->draw(roadSprite2);
 }
-
-void WorldSFML::handleInput() {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        scrollWorld();
-    }
-    handleInputEntities();
-}

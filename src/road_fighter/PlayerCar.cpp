@@ -20,24 +20,17 @@ void PlayerCar::handleMovement() {
     else {
         speedX = -speedX/2;
     }
-//    x = getXPos();
-//    if  (y + speedY > -3 && y + speedY + height < 3) {
-//        updatePos(x, y + speedY);
-//    }
-//    else {
-//        speedY = 0;
-//    }
     if (prevSpeedX == speedX) {
         notMovingX = true;
     }
-//    if (prevSpeedY == speedY) {
-//        notMovingY = true;
-//    }
+    if (prevSpeedY == speedY) {
+        notMovingY = true;
+    }
     if (notMovingX) {
         speedX *= 0.93;
     }
     if (notMovingY) {
-        speedY *= 0.93;
+        speedY *= 0.95;
     }
     prevSpeedX = speedX;
     prevSpeedY = speedY;
@@ -59,14 +52,18 @@ void PlayerCar::moveRight() {
 
 void PlayerCar::moveUp() {
     notMovingY = false;
-    if (speedY >= -0.00012) {
-        speedY -= 0.00000002;
+    if (speedY >= -0.06) {
+        speedY -= 0.002;
     }
 }
 
 void PlayerCar::moveDown() {
     notMovingY = false;
-    if (speedY <= 0) {
-        speedY += 0.00000001;
+    if (speedY <= 0.06) {
+        speedY += 0.002;
     }
+}
+
+double PlayerCar::getMovementSpeed() const {
+    return speedY;
 }

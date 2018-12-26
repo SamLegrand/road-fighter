@@ -42,7 +42,7 @@ void World::draw() {
     }
 }
 
-void World::handleInputEntities() {
+void World::handleInput() {
     player->handleInput();
     for (const unique_ptr<Entity>& e : entities) {
         e->handleInput();
@@ -54,15 +54,19 @@ void World::handleMovement() {
     for (const unique_ptr<Entity>& e : entities) {
         e->handleMovement();
     }
-}
-
-void World::scrollWorld() {
-    for (const unique_ptr<Entity>& e : entities) {
-        e->scroll();
+    double movementSpeed = player->getMovementSpeed();
+    if (movementSpeed != 0) {
+        scrollWorld(movementSpeed);
     }
-    scroll();
 }
 
-void World::setPlayer(unique_ptr<road_fighter::Entity> entity) {
+void World::scrollWorld(const double& speed) {
+    for (const unique_ptr<Entity>& e : entities) {
+        e->scroll(speed);
+    }
+    scroll(speed);
+}
+
+void World::setPlayer(unique_ptr<road_fighter::PlayerCar> entity) {
     player = move(entity);
 }

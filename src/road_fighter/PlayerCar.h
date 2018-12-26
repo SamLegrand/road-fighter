@@ -16,8 +16,7 @@ namespace road_fighter {
         void moveUp();
         void moveDown();
         void handleMovement() override;
-
-
+        double getMovementSpeed() const;
 
     private:
         double speedX;

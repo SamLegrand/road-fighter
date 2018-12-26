@@ -7,6 +7,7 @@
 
 #include "Entity.h"
 #include "Score.h"
+#include "PlayerCar.h"
 #include <vector>
 #include <memory>
 #include <algorithm>
@@ -25,19 +26,19 @@ namespace road_fighter {
 
         void addEntity(unique_ptr<Entity> entity);
         void removeEntity(const unique_ptr<Entity>& entity);
-        void setPlayer(unique_ptr<Entity> entity);
+        void setPlayer(unique_ptr<PlayerCar> entity);
 
         void draw() override;
         void handleMovement() override;
-        void scrollWorld();
-        void handleInputEntities();
+        void scrollWorld(const double& speed);
+        void handleInput() override;
 
         virtual void drawSelf() = 0;
 
     private:
         vector<shared_ptr<Observer>> observers;
         vector<unique_ptr<Entity>> entities;
-        unique_ptr<Entity> player;
+        unique_ptr<PlayerCar> player;
     };
 }
 

@@ -16,7 +16,7 @@ namespace road_fighter {
         virtual void handleInput() = 0;
         virtual void handleMovement() = 0;
         Entity(const double& width, const double& height);
-        void scroll();
+        void scroll(const double& speed);
         void updatePos(const double& x, const double& y);
         double getXPos() const;
         double getYPos() const;
