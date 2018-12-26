@@ -9,6 +9,7 @@ using namespace road_fighter;
 World::World() : Entity(8, 6) {
     xPos = -4;
     yPos = -3;
+    type = "World";
 }
 
 void World::addObserver(const shared_ptr<Observer>& observer) {
@@ -42,7 +43,7 @@ void World::draw() {
     }
 }
 
-void World::handleInput() {
+void World::handleInputEntities() {
     player->handleInput();
     for (const unique_ptr<Entity>& e : entities) {
         e->handleInput();
@@ -115,4 +116,25 @@ bool World::addPassableCar(unique_ptr<road_fighter::Entity> entity) {
     }
     addEntity(move(entity));
     return true;
+}
+
+void World::spawnBullet(unique_ptr<Entity> entity) {
+    entity->updatePos(player->getXPos() + player->getWidth()/2 - entity->getWidth()/2, player->getYPos() - entity->getHeight());
+    for (const unique_ptr<Entity>& e : entities) {
+        if (areColliding(*entity, *e)) {
+            return;
+        }
+    }
+    addEntity(move(entity));
+}
+
+void World::cleanEntities() {
+    for (const unique_ptr<Entity>& e : entities) {
+        if (e->getYPos() + e->getHeight() < -3) {
+            if (e->getType() == "Bullet") {
+                entities.erase(remove(entities.begin(), entities.end(), e), entities.end());
+                break;
+            }
+        }
+    }
 }

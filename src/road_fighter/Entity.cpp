@@ -6,9 +6,9 @@
 
 using namespace road_fighter;
 
-Entity::Entity() : xPos(0), yPos(0), leftBound(-1.75), rightBound(1.75) {}
+Entity::Entity() : xPos(0), yPos(0), leftBound(-1.75), rightBound(1.75), type("Entity") {}
 
-Entity::Entity(const double& w, const double& h) : xPos(0), yPos(0), width(w), height(h), leftBound(-1.75), rightBound(1.75) {}
+Entity::Entity(const double& w, const double& h) : xPos(0), yPos(0), width(w), height(h), leftBound(-1.75), rightBound(1.75), type("Entity") {}
 
 void Entity::updatePos(const double &x, const double &y) {
     xPos = x;
@@ -33,4 +33,8 @@ double Entity::getWidth() const {
 
 double Entity::getHeight() const {
     return height;
+}
+
+const string &Entity::getType() const {
+    return type;
 }

@@ -37,3 +37,7 @@ void WorldSFML::drawSelf() {
     window->draw(roadSprite1);
     window->draw(roadSprite2);
 }
+
+void WorldSFML::handleInput() {
+    handleInputEntities();
+}

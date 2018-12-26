@@ -33,3 +33,11 @@ void Game::spawnPassableCar() {
         while (++counter < 3 && !world->addPassableCar(factory->createPassableCar()));
     }
 }
+
+void Game::spawnBullet() {
+    world->spawnBullet(factory->createBullet());
+}
+
+void Game::cleanEntities() {
+    world->cleanEntities();
+}

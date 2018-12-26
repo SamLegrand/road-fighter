@@ -9,7 +9,11 @@
 
 namespace road_fighter {
     class Bullet : public Entity {
-        void handleMovement() override {};
+    public:
+        Bullet(const double& width, const double& height);
+        void handleMovement() override;
+    private:
+        double speed;
     };
 }
 

@@ -56,6 +56,17 @@ int main() {
 //        if (FPS.count() >= 1)
 //        {
         fpsTimer = steady_clock::now();
+        window->clear();
+        g.drawEntities();
+        window->display();
+        g.handleInput();
+        g.handleMovement();
+        g.spawnPassableCar();
+        g.checkCollisions();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            g.spawnBullet();
+        }
+        g.cleanEntities();
         sf::Event event;
         while (window->pollEvent(event))
         {
@@ -67,14 +78,7 @@ int main() {
                 }
             }
         }
-        g.handleInput();
-        g.handleMovement();
-        g.spawnPassableCar();
-        g.checkCollisions();
-        window->clear();
-        g.drawEntities();
-        window->display();
-        this_thread::sleep_until(fpsTimer + duration_cast<microseconds>(duration<double>(1/60.0)));
+        this_thread::sleep_until(fpsTimer + duration<double>(1/60.0));
 //        }
     }
     return 0;

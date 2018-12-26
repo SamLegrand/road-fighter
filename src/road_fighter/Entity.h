@@ -22,6 +22,7 @@ namespace road_fighter {
         double getYPos() const;
         double getWidth() const;
         double getHeight() const;
+        const string &getType() const;
 
     protected:
         double xPos;
@@ -30,6 +31,7 @@ namespace road_fighter {
         double height;
         double leftBound;
         double rightBound;
+        string type;
     };
 }
 

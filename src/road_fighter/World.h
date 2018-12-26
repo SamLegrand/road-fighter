@@ -9,6 +9,7 @@
 #include "Score.h"
 #include "PlayerCar.h"
 #include "Random.h"
+#include "Bullet.h"
 #include <vector>
 #include <memory>
 #include <algorithm>
@@ -33,9 +34,11 @@ namespace road_fighter {
         void draw() override;
         void handleMovement() override;
         void scrollWorld(const double& speed);
-        void handleInput() override;
+        void handleInputEntities();
         bool areColliding(const Entity& e1, const Entity& e2);
         void checkCollisions();
+        void spawnBullet(unique_ptr<Entity> entity);
+        void cleanEntities();
 
         virtual void drawSelf() = 0;
 

@@ -14,6 +14,7 @@ namespace road_fighter_SFML {
         WorldSFML();
         WorldSFML(const shared_ptr<sf::RenderWindow>& w);
         void drawSelf() override;
+        void handleInput() override;
 
     private:
         sf::Texture roadTexture;

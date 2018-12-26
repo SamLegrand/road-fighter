@@ -13,7 +13,7 @@ unique_ptr<road_fighter::PlayerCar> EntityFactorySFML::createPlayerCar() {
 }
 
 unique_ptr<road_fighter::Bullet> EntityFactorySFML::createBullet() {
-    return make_unique<BulletSFML>();
+    return make_unique<BulletSFML>(window);
 }
 
 unique_ptr<road_fighter::PassableCar> EntityFactorySFML::createPassableCar() {
