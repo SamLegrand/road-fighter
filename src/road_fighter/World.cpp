@@ -55,8 +55,11 @@ void World::handleMovement() {
         e->handleMovement();
     }
     double movementSpeed = player->getMovementSpeed();
-    if (movementSpeed != 0) {
+    if (movementSpeed != 0 && yPos >= -3) {
         scrollWorld(movementSpeed);
+    }
+    if (yPos < -3) {
+        yPos = -3;
     }
 }
 
@@ -82,6 +85,8 @@ void World::checkCollisions() {
     for (const unique_ptr<Entity>& e : entities) {
         if (areColliding(*player, *e)) {
             cout << "Player colliding with " << &e << endl;
+            entities.erase(remove(entities.begin(), entities.end(), e), entities.end());
+            break;
         }
     }
 }

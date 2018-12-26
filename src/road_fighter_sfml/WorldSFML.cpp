@@ -30,12 +30,10 @@ void WorldSFML::drawSelf() {
     road_fighter::Transformation::getInstance().dimensionsToRes(w, h);
     double x = xPos;
     double y = yPos;
-    if ((yPos+3)/height >= 1) {
-        yPos = -3;
-    }
     road_fighter::Transformation::getInstance().coordinatesToRes(x, y);
-    roadSprite1.setPosition(static_cast<float>(x), static_cast<float>(y));
-    roadSprite2.setPosition(static_cast<float>(x), static_cast<float>(y) - static_cast<float>(h));
+    auto spriteY = static_cast<float>(static_cast<int>(y)%static_cast<int>(h));
+    roadSprite1.setPosition(static_cast<float>(x), spriteY);
+    roadSprite2.setPosition(static_cast<float>(x), spriteY - static_cast<float>(h));
     window->draw(roadSprite1);
     window->draw(roadSprite2);
 }
