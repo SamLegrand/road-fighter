@@ -20,7 +20,7 @@ void PlayerCar::handleMovement() {
     else {
         speedX = -speedX/2;
     }
-    x = getXPos();
+//    x = getXPos();
 //    if  (y + speedY > -3 && y + speedY + height < 3) {
 //        updatePos(x, y + speedY);
 //    }
