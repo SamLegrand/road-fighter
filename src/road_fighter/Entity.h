@@ -20,6 +20,8 @@ namespace road_fighter {
         void updatePos(const double& x, const double& y);
         double getXPos() const;
         double getYPos() const;
+        double getWidth() const;
+        double getHeight() const;
 
     protected:
         double xPos;

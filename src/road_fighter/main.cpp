@@ -70,6 +70,7 @@ int main() {
         g.handleInput();
         g.handleMovement();
         g.spawnPassableCar();
+        g.checkCollisions();
         window->clear();
         g.drawEntities();
         window->display();

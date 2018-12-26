@@ -26,3 +26,11 @@ double Entity::getYPos() const {
 void Entity::scroll(const double& speed) {
     yPos -= speed;
 }
+
+double Entity::getWidth() const {
+    return width;
+}
+
+double Entity::getHeight() const {
+    return height;
+}

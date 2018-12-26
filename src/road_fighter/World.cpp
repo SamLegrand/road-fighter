@@ -70,3 +70,44 @@ void World::scrollWorld(const double& speed) {
 void World::setPlayer(unique_ptr<road_fighter::PlayerCar> entity) {
     player = move(entity);
 }
+
+void World::checkCollisions() {
+    for (const unique_ptr<Entity>& e1 : entities) {
+        for (const unique_ptr<Entity>& e2 : entities) {
+            if (e1 != e2 && areColliding(*e1, *e2)) {
+                cout << &e1 << " colliding with " << &e2 << endl;
+            }
+        }
+    }
+    for (const unique_ptr<Entity>& e : entities) {
+        if (areColliding(*player, *e)) {
+            cout << "Player colliding with " << &e << endl;
+        }
+    }
+}
+
+bool World::areColliding(const road_fighter::Entity &e1, const road_fighter::Entity &e2) {
+    // Object is above or under other object, no collision
+    if (e1.getYPos() + e1.getHeight() < e2.getYPos() || e1.getYPos() > e2.getYPos() + e2.getHeight()) {
+        return false;
+    }
+    // Object is left or right from other object, no collision
+    else if (e1.getXPos() + e1.getWidth() < e2.getXPos() || e1.getXPos() > e2.getXPos() + e2.getWidth()) {
+        return false;
+    }
+    // Otherwise, always colliding
+    return true;
+}
+
+bool World::addPassableCar(unique_ptr<road_fighter::Entity> entity) {
+    for (const unique_ptr<Entity>& e : entities) {
+        if (areColliding(*entity, *e)) {
+            return false;
+        }
+    }
+    if (player->getMovementSpeed() > 0.01) {
+        return true;
+    }
+    addEntity(move(entity));
+    return true;
+}

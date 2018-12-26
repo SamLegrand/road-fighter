@@ -19,6 +19,7 @@ namespace road_fighter {
         void handleInput();
         void handleMovement();
         void spawnPassableCar();
+        void checkCollisions();
 
     private:
         shared_ptr<EntityFactory> factory;
