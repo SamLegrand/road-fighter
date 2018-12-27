@@ -29,7 +29,7 @@ void Game::checkCollisions() {
 void Game::spawnPassableCar() {
     double rnd = Random::getInstance().getRandom(0, 1);
     unsigned int counter = 0;
-    if (rnd < 1/300.0) {
+    if (rnd < 1/150.0) {
         while (++counter < 3 && !world->addPassableCar(factory->createPassableCar()));
     }
 }
