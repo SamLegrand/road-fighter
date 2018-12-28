@@ -76,16 +76,25 @@ void World::setPlayer(unique_ptr<road_fighter::PlayerCar> entity) {
 }
 
 void World::checkCollisions() {
-    for (const unique_ptr<Entity>& e1 : entities) {
-        for (const unique_ptr<Entity>& e2 : entities) {
-            if (e1 != e2 && areColliding(*e1, *e2)) {
-                cout << &e1 << " colliding with " << &e2 << endl;
+//    vector<unique_ptr<road_fighter::Entity>> myEntities = entities;
+    set<size_t, greater<>> toErase;
+    for (size_t i = 0; i < entities.size(); ++i) {
+        if (entities[i]->getType() == "Bullet") {
+            for (size_t j = 0; j < entities.size(); ++j) {
+                if (entities[i] != entities[j] && areColliding(*entities[i], *entities[j])) {
+                    cout << entities[i]->getType() << " colliding with " << entities[j]->getType() << endl;
+                        toErase.insert(i);
+                        toErase.insert(j);
+                }
             }
         }
     }
+    for (const size_t& index : toErase) {
+        entities.erase(entities.begin() + index);
+    }
     for (size_t i = 0; i < entities.size();) {
         if (areColliding(*player, *entities[i])) {
-            cout << "Player colliding with " << &entities[i] << endl;
+            cout << "Player colliding with " << entities[i]->getType() << endl;
             entities.erase(entities.begin() + i);
             continue;
         }
@@ -121,13 +130,16 @@ bool World::addPassableCar(unique_ptr<road_fighter::Entity> entity) {
 }
 
 void World::spawnBullet(unique_ptr<Entity> entity) {
-    entity->updatePos(player->getXPos() + player->getWidth()/2 - entity->getWidth()/2, player->getYPos() - entity->getHeight());
-    for (const unique_ptr<Entity>& e : entities) {
-        if (areColliding(*entity, *e)) {
-            return;
+    if (player->canShoot()) {
+        entity->updatePos(player->getXPos() + player->getWidth()/2 - entity->getWidth()/2, player->getYPos() - entity->getHeight());
+        for (const unique_ptr<Entity>& e : entities) {
+            if (areColliding(*entity, *e)) {
+                return;
+            }
         }
+        addEntity(move(entity));
+        player->setBlockShoot(true);
     }
-    addEntity(move(entity));
 }
 
 void World::cleanEntities() {

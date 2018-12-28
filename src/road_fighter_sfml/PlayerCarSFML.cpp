@@ -44,4 +44,7 @@ void PlayerCarSFML::handleInput() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         moveDown();
     }
+    if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))) {
+        setBlockShoot(false);
+    }
 }

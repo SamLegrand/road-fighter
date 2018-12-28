@@ -17,6 +17,10 @@ namespace road_fighter {
         void moveDown();
         void handleMovement() override;
         double getMovementSpeed() const;
+        void setBlockShoot(const bool& b);
+        bool hasBullets() const;
+        void addBullets();
+        bool canShoot() const;
 
     private:
         double speedX;
@@ -25,6 +29,9 @@ namespace road_fighter {
         double prevSpeedY;
         bool notMovingX;
         bool notMovingY;
+        bool blockShoot;
+        unsigned int ammo;
+        unsigned int maxAmmo;
     };
 }
 

@@ -9,6 +9,9 @@ using namespace road_fighter;
 PlayerCar::PlayerCar() : Entity(0.4, 0.8) {
     speedX = 0;
     speedY = 0;
+    blockShoot = false;
+    ammo = 0;
+    maxAmmo = 9;
 }
 
 void PlayerCar::handleMovement() {
@@ -69,4 +72,20 @@ void PlayerCar::moveDown() {
 
 double PlayerCar::getMovementSpeed() const {
     return speedY;
+}
+
+void PlayerCar::setBlockShoot(const bool &b) {
+    blockShoot = b;
+}
+
+bool PlayerCar::hasBullets() const {
+    return ammo > 0;
+}
+
+void PlayerCar::addBullets() {
+    ammo += 3;
+}
+
+bool PlayerCar::canShoot() const {
+    return !blockShoot;
 }
