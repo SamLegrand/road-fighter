@@ -13,10 +13,10 @@
 namespace road_fighter {
     class Game {
     public:
-        Game();
-        Game(shared_ptr<EntityFactory>& factory);
+        explicit Game(const shared_ptr<EntityFactory>& factory);
         void drawEntities();
-        void handleInput();
+        virtual void handleInput() = 0;
+        void handleInputWorld();
         void handleMovement();
         void spawnPassableCar();
         void checkCollisions();

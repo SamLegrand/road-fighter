@@ -6,7 +6,7 @@
 
 using namespace road_fighter;
 
-Game::Game(shared_ptr<EntityFactory> &f) : factory(f), world(factory->createWorld()) {
+Game::Game(const shared_ptr<EntityFactory> &f) : factory(f), world(f->createWorld()) {
     world->setPlayer(factory->createPlayerCar());
 }
 
@@ -14,7 +14,7 @@ void Game::drawEntities() {
     world->draw();
 }
 
-void Game::handleInput() {
+void Game::handleInputWorld() {
     world->handleInput();
 }
 

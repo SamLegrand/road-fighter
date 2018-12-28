@@ -2,8 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <chrono>
 #include <zconf.h>
-#include "Game.h"
 #include "../road_fighter_sfml/EntityFactorySFML.h"
+#include "../road_fighter_sfml/GameSFML.h"
 #include <time.h>
 #include <thread>
 
@@ -16,15 +16,14 @@ int main() {
     shared_ptr<sf::RenderWindow> window = make_shared<sf::RenderWindow>(sf::VideoMode(1280, 960, desktop.bitsPerPixel), "Road Fighter");
 //    sf::RenderWindow window(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "SFML works!", sf::Style::Fullscreen);
 
-    shared_ptr<road_fighter::EntityFactory> e = make_shared<EntityFactorySFML>(window);
     road_fighter::Transformation::getInstance().setResolution(1280, 960);
-    road_fighter::Game g(e);
+    GameSFML g(window);
 
 //    sf::CircleShape shape(100.f);
 //    shape.setFillColor(sf::Color::Green);
 
     steady_clock::time_point fpsTimer(steady_clock::now());
-    duration<int32_t, ratio<1, 60>> FPS{};
+//    duration<int32_t, ratio<1, 60>> FPS{};
     window->setVerticalSyncEnabled(false);
 //    microseconds loopTime{};
 
@@ -63,9 +62,6 @@ int main() {
         g.handleMovement();
         g.spawnPassableCar();
         g.checkCollisions();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            g.spawnBullet();
-        }
         g.cleanEntities();
         sf::Event event;
         while (window->pollEvent(event))
