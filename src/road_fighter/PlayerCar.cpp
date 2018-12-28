@@ -55,7 +55,7 @@ void PlayerCar::moveRight() {
 
 void PlayerCar::moveUp() {
     notMovingY = false;
-    if (speedY >= -0.06) {
+    if (speedY >= -0.08) {
         speedY -= 0.001;
     }
 }
@@ -88,4 +88,9 @@ void PlayerCar::addBullets() {
 
 bool PlayerCar::canShoot() const {
     return !blockShoot;
+}
+
+void PlayerCar::setSpeed(const double &s) {
+    speedY = s;
+    speedX = -speedX*0.5;
 }

@@ -21,6 +21,7 @@ namespace road_fighter {
         bool hasBullets() const;
         void addBullets();
         bool canShoot() const;
+        void setSpeed(const double& s);
 
     private:
         double speedX;

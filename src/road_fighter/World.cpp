@@ -37,10 +37,10 @@ void World::removeEntity(const unique_ptr<road_fighter::Entity> &entity) {
 
 void World::draw() {
     drawSelf();
-    player->draw();
     for (const unique_ptr<Entity>& e : entities) {
         e->draw();
     }
+    player->draw();
 }
 
 void World::handleInputEntities() {
@@ -95,8 +95,17 @@ void World::checkCollisions() {
     for (size_t i = 0; i < entities.size();) {
         if (areColliding(*player, *entities[i])) {
             cout << "Player colliding with " << entities[i]->getType() << endl;
-            entities.erase(entities.begin() + i);
-            continue;
+            if (entities[i]->getType() == "Truck") {
+                if (player->getYPos() < entities[i]->getYPos()) {
+                    player->setSpeed(-0.04);
+                }
+                else {
+                    player->setSpeed(0.02);
+                }
+
+            }
+//            entities.erase(entities.begin() + i);
+//            continue;
         }
         ++i;
     }
@@ -143,12 +152,17 @@ void World::spawnBullet(unique_ptr<Entity> entity) {
 }
 
 void World::cleanEntities() {
-    for (const unique_ptr<Entity>& e : entities) {
-        if (e->getYPos() + e->getHeight() < -3) {
-            if (e->getType() == "Bullet") {
-                entities.erase(remove(entities.begin(), entities.end(), e), entities.end());
-                break;
+    for (size_t i = 0; i < entities.size();) {
+        if (entities[i]->getYPos() + entities[i]->getHeight() < -3) {
+            if (entities[i]->getType() == "Bullet") {
+                entities.erase(entities.begin() + i);
+                continue;
             }
         }
+        if (entities[i]->getYPos() + entities[i]->getHeight() < -30 || entities[i]->getYPos() > 30) {
+            entities.erase(entities.begin() + i);
+            continue;
+        }
+        ++i;
     }
 }
