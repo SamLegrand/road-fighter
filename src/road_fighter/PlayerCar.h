@@ -22,6 +22,7 @@ namespace road_fighter {
         void addBullets();
         bool canShoot() const;
         void setSpeed(const double& s);
+        void setMotorDisabled(const unsigned int& time);
 
     private:
         double speedX;
@@ -33,6 +34,7 @@ namespace road_fighter {
         bool blockShoot;
         unsigned int ammo;
         unsigned int maxAmmo;
+        unsigned int motorDisabledTime;
     };
 }
 

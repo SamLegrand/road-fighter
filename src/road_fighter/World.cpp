@@ -96,13 +96,22 @@ void World::checkCollisions() {
             cout << "Player colliding with " << entities[i]->getType() << endl;
             if (entities[i]->getType() == "Truck") {
                 notifyObservers(-100);
+                player->setMotorDisabled(60);
                 if (player->getYPos() < entities[i]->getYPos()) {
                     player->setSpeed(-0.04);
                 }
                 else {
                     player->setSpeed(0.02);
                 }
-
+            }
+            if (entities[i]->getType() == "Taxi") {
+                notifyObservers(-100);
+                if (player->getYPos() < entities[i]->getYPos()) {
+                    player->setSpeed(-0.02);
+                }
+                else {
+                    player->setSpeed(0.01);
+                }
             }
 //            entities.erase(entities.begin() + i);
 //            continue;

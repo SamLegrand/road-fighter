@@ -12,6 +12,7 @@ PlayerCar::PlayerCar() : Entity(0.4, 0.8) {
     blockShoot = false;
     ammo = 0;
     maxAmmo = 9;
+    motorDisabledTime = 0;
 }
 
 void PlayerCar::handleMovement() {
@@ -35,6 +36,9 @@ void PlayerCar::handleMovement() {
     if (notMovingY) {
         speedY *= 0.97;
     }
+    if (motorDisabledTime > 0) {
+        motorDisabledTime--;
+    }
     prevSpeedX = speedX;
     prevSpeedY = speedY;
 }
@@ -55,7 +59,7 @@ void PlayerCar::moveRight() {
 
 void PlayerCar::moveUp() {
     notMovingY = false;
-    if (speedY >= -0.08) {
+    if (speedY >= -0.08 && motorDisabledTime == 0) {
         speedY -= 0.001;
     }
 }
@@ -93,4 +97,8 @@ bool PlayerCar::canShoot() const {
 void PlayerCar::setSpeed(const double &s) {
     speedY = s;
     speedX = -speedX*0.5;
+}
+
+void PlayerCar::setMotorDisabled(const unsigned int &time) {
+    motorDisabledTime = time;
 }
