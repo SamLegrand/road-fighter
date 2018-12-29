@@ -13,7 +13,10 @@
 namespace road_fighter {
     class Game {
     public:
+        // Constructor
         explicit Game(const shared_ptr<EntityFactory>& factory);
+
+        // Functions to call in game loop, calls all actions in world
         void drawEntities();
         virtual void handleInput() = 0;
         void handleInputWorld();
@@ -24,8 +27,8 @@ namespace road_fighter {
         void cleanEntities();
 
     private:
-        shared_ptr<EntityFactory> factory;
-        unique_ptr<World> world;
+        shared_ptr<EntityFactory> factory;  // Factory for entity creation
+        unique_ptr<World> world;    // Game world
     };
 }
 

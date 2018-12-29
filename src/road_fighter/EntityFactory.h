@@ -13,6 +13,7 @@
 #include "World.h"
 
 namespace road_fighter {
+    // Abstract base class for entity factory
     class EntityFactory {
     public:
         virtual unique_ptr<Bullet> createBullet() = 0;

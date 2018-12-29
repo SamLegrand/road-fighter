@@ -13,18 +13,20 @@
 namespace road_fighter_SFML {
     class WorldSFML : public road_fighter::World {
     public:
+        // Constructors
         WorldSFML();
         WorldSFML(const shared_ptr<sf::RenderWindow>& w);
+
+        // Display and input functions
         void drawSelf() override;
         void handleInput() override;
 
     private:
-        sf::Texture roadTexture;
-        sf::Texture finishTexture;
-        sf::Sprite roadSprite1;
-        sf::Sprite roadSprite2;
-        shared_ptr<sf::RenderWindow> window;
-        unsigned int counter;
+        sf::Texture roadTexture;    // Texture for road (main part of level)
+        sf::Texture finishTexture;  // Texture for finish line
+        sf::Sprite roadSprite1;     // Sprite
+        sf::Sprite roadSprite2;     // Second sprite to enable background looping
+        shared_ptr<sf::RenderWindow> window;    // Window to render to
     };
 }
 

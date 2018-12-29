@@ -11,30 +11,37 @@ namespace road_fighter {
     class PlayerCar : public Entity {
     public:
         PlayerCar();
+
+        // Movement functions
         void moveLeft();
         void moveRight();
         void moveUp();
         void moveDown();
         void handleMovement() override;
+
+        // Information needed by world
         double getMovementSpeed() const;
-        void setBlockShoot(const bool& b);
-        bool hasBullets() const;
-        void addBullets();
         bool canShoot() const;
+        bool hasBullets() const;
+
+        // Setters needed for world
+        // Handles when shooting and accelerating is allowed
+        void addBullets();
+        void setBlockShoot(const bool& b);
         void setSpeed(const double& s);
         void setMotorDisabled(const unsigned int& time);
 
     private:
-        double speedX;
-        double speedY;
-        double prevSpeedX;
-        double prevSpeedY;
-        bool notMovingX;
-        bool notMovingY;
-        bool blockShoot;
-        unsigned int ammo;
-        unsigned int maxAmmo;
-        unsigned int motorDisabledTime;
+        double speedX;  // Horizontal speed
+        double speedY;  // Vertical speed
+        double prevSpeedX;  // Keeps previous speed for handling slowdown
+        double prevSpeedY;  // Keeps previous speed for handling slowdown
+        bool notMovingX;    // Boolean for handling slowdown
+        bool notMovingY;    // Boolean for handling slowdown
+        bool blockShoot;    // Blocks shooting (only able to shoot once per press)
+        unsigned int ammo;  // Requires ammo to shoot
+        unsigned int maxAmmo;   // Ammo capacity
+        unsigned int motorDisabledTime; // Time that acceleration should not be allowed
     };
 }
 

@@ -10,10 +10,13 @@
 namespace road_fighter {
     class PassableCar : public Entity {
     public:
+        // Constructor
         PassableCar(const double& width, const double& height);
+
+        // Movement function
         void handleMovement() override;
     private:
-        double speed;
+        double speed;   // Constant speed of the passable car
     };
 }
 

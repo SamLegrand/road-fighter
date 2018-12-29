@@ -11,14 +11,17 @@
 namespace road_fighter_SFML {
     class PassableCarSFML : public road_fighter::PassableCar {
     public:
+        // Constructors
         PassableCarSFML();
         PassableCarSFML(const shared_ptr<sf::RenderWindow>& w);
+
+        // Display and input functions
         void draw() override;
         void handleInput() override {};
     private:
-        sf::Texture texture;
-        sf::Sprite sprite;
-        shared_ptr<sf::RenderWindow> window;
+        sf::Texture texture;    // Texture
+        sf::Sprite sprite;      // Sprite to render
+        shared_ptr<sf::RenderWindow> window;    // Window to render to
     };
 }
 

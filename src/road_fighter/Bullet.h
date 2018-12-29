@@ -10,10 +10,13 @@
 namespace road_fighter {
     class Bullet : public Entity {
     public:
+        // Constructor
         Bullet(const double& width, const double& height);
+
+        // Function for handling bullet movement
         void handleMovement() override;
     private:
-        double speed;
+        double speed; // Constant speed of the bullet
     };
 }
 

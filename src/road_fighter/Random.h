@@ -14,25 +14,18 @@ using namespace std;
 namespace road_fighter {
     class Random {
     public:
-        /**
-         * @brief Function that returns the instance of the Random singleton
-         * @return instance of Random singleton
-         */
+        // Returns the singleton instance
         static Random& getInstance();
 
-        // Make sure no copies or assignments are valid
+        // Deleting copy constructor and assignment operator (no copies are allowed!)
         Random(Random const&) = delete;
         void operator=(Random const&)  = delete;
 
-        /**
-         * @brief Function that generates a random real number
-         * @param lowerBound lower bound of generated number
-         * @param upperBound upper bound of generated number
-         * @return double between lower and upper bound
-         */
+        // Returns a random double between lowerBound and upperBound
         double getRandom(const double& lowerBound, const double& upperBound);
 
     private:
+        // Private constructor (only constructed once)
         Random() = default;
     };
 }

@@ -6,6 +6,7 @@
 #define ROAD_FIGHTER_OBSERVER_H
 
 namespace road_fighter {
+    // Abstract base class for observers
     class Observer {
     public:
         virtual void update(const double& change) = 0;

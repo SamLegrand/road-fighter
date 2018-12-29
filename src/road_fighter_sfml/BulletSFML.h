@@ -11,14 +11,17 @@
 namespace road_fighter_SFML {
     class BulletSFML : public road_fighter::Bullet {
     public:
+        // Constructors
         BulletSFML();
         BulletSFML(const shared_ptr<sf::RenderWindow>& w);
+
+        // Display and input functions
         void draw() override;
         void handleInput() override {};
     private:
-        sf::Texture texture;
-        sf::Sprite sprite;
-        shared_ptr<sf::RenderWindow> window;
+        sf::Texture texture;    // Texture
+        sf::Sprite sprite;      // Sprite to render
+        shared_ptr<sf::RenderWindow> window;    // Window to render to
     };
 }
 

@@ -6,7 +6,7 @@
 
 using namespace road_fighter_SFML;
 
-WorldSFML::WorldSFML() : World(), roadTexture(sf::Texture()), roadSprite1(sf::Sprite()), counter(1) {
+WorldSFML::WorldSFML() : World(), roadTexture(sf::Texture()), roadSprite1(sf::Sprite()) {
     if (!roadTexture.loadFromFile("../graphics/Road.png")) {
         cerr << "Loading texture for road failed." << endl;
     }
