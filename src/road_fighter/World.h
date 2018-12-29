@@ -23,9 +23,9 @@ namespace road_fighter {
         World();
 
         // Observer functions
-        void addObserver(const shared_ptr<Observer>& observer);
-        void removeObserver(const shared_ptr<Observer>& observer);
-        void notifyObservers();
+        void addObserver(const shared_ptr<Score>& observer);
+        void removeObserver(const shared_ptr<Score>& observer);
+        void notifyObservers(const double& scoreChange);
 
         void addEntity(unique_ptr<Entity> entity);
         void removeEntity(const unique_ptr<Entity>& entity);
@@ -44,7 +44,7 @@ namespace road_fighter {
         virtual void drawSelf() = 0;
 
     private:
-        vector<shared_ptr<Observer>> observers;
+        vector<shared_ptr<Score>> observers;
         vector<unique_ptr<Entity>> entities;
         unique_ptr<PlayerCar> player;
     };

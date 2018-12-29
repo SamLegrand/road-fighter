@@ -7,6 +7,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "../road_fighter/World.h"
+#include "ScoreSFML.h"
+#include "../road_fighter/Score.h"
 
 namespace road_fighter_SFML {
     class WorldSFML : public road_fighter::World {

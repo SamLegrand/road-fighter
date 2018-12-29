@@ -9,7 +9,12 @@
 
 namespace road_fighter {
     class Score : public Observer {
-        void update() final;
+    public:
+        Score();
+        void update(const double& change) final;
+        virtual void display() = 0;
+    protected:
+        double score;
     };
 }
 

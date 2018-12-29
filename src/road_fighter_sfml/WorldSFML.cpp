@@ -22,6 +22,7 @@ WorldSFML::WorldSFML() : World(), roadTexture(sf::Texture()), roadSprite1(sf::Sp
 
 WorldSFML::WorldSFML(const shared_ptr<sf::RenderWindow>& w) : WorldSFML() {
     window = w;
+    addObserver(make_shared<ScoreSFML>(w));
 }
 
 void WorldSFML::drawSelf() {

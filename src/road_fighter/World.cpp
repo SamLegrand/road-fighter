@@ -12,19 +12,13 @@ World::World() : Entity(8, 6) {
     type = "World";
 }
 
-void World::addObserver(const shared_ptr<Observer>& observer) {
+void World::addObserver(const shared_ptr<Score>& observer) {
     observers.emplace_back(observer);
 }
 
-void World::removeObserver(const shared_ptr<Observer>& observer) {
+void World::removeObserver(const shared_ptr<Score>& observer) {
     // Move element to end of vector, then erase it
     observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
-}
-
-void World::notifyObservers() {
-    for (const shared_ptr<Observer>& observer : observers) {
-        observer->update();
-    }
 }
 
 void World::addEntity(unique_ptr<road_fighter::Entity> entity) {
@@ -41,6 +35,9 @@ void World::draw() {
         e->draw();
     }
     player->draw();
+    for (const shared_ptr<Score>& observer : observers) {
+        observer->display();
+    }
 }
 
 void World::handleInputEntities() {
@@ -69,6 +66,7 @@ void World::scrollWorld(const double& speed) {
         e->scroll(speed);
     }
     scroll(speed);
+    notifyObservers(-speed*2);
 }
 
 void World::setPlayer(unique_ptr<road_fighter::PlayerCar> entity) {
@@ -83,8 +81,9 @@ void World::checkCollisions() {
             for (size_t j = 0; j < entities.size(); ++j) {
                 if (entities[i] != entities[j] && areColliding(*entities[i], *entities[j])) {
                     cout << entities[i]->getType() << " colliding with " << entities[j]->getType() << endl;
-                        toErase.insert(i);
-                        toErase.insert(j);
+                    toErase.insert(i);
+                    toErase.insert(j);
+                    notifyObservers(200);
                 }
             }
         }
@@ -96,6 +95,7 @@ void World::checkCollisions() {
         if (areColliding(*player, *entities[i])) {
             cout << "Player colliding with " << entities[i]->getType() << endl;
             if (entities[i]->getType() == "Truck") {
+                notifyObservers(-100);
                 if (player->getYPos() < entities[i]->getYPos()) {
                     player->setSpeed(-0.04);
                 }
@@ -164,5 +164,11 @@ void World::cleanEntities() {
             continue;
         }
         ++i;
+    }
+}
+
+void World::notifyObservers(const double& scoreChange) {
+    for (const shared_ptr<Score>& observer : observers) {
+        observer->update(scoreChange);
     }
 }

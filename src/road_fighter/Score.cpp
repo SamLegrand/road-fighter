@@ -6,6 +6,13 @@
 
 using namespace road_fighter;
 
-void Score::update() {
+Score::Score() : score(0){}
 
+void Score::update(const double& change) {
+    if (score + change > 0) {
+        score += change;
+    }
+    else {
+        score = 0;
+    }
 }
