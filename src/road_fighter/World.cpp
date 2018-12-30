@@ -53,8 +53,11 @@ void World::handleMovement() {
         e->handleMovement();
     }
     double movementSpeed = player->getMovementSpeed();
-    if (movementSpeed != 0 && yPos >= -3 && yPos - 4 <= length) {
+    if (movementSpeed != 0 && yPos >= -3 && yPos - 5 <= length) {
         scrollWorld(movementSpeed);
+    }
+    if (yPos - 5 > length) {
+        notifyObservers("GameEnd");
     }
     if (yPos < -3) {
         yPos = -3;
@@ -115,7 +118,7 @@ void World::checkCollisions() {
                             r->setSpeed(0.02);
                         }
                     }
-                    if (e->getType() == "Taxi") {
+                    if (e->getType() == "Taxi" || e->getType() == "RacingCar") {
                         if (r->getYPos() < e->getYPos()) {
                             r->setSpeed(-0.02);
                         }
@@ -236,4 +239,10 @@ void World::setLength(const double &l) {
 
 double World::getLength() const {
     return length;
+}
+
+void World::notifyObservers(const string &event) {
+    for (const shared_ptr<Score>& observer : observers) {
+        observer->update(event);
+    }
 }

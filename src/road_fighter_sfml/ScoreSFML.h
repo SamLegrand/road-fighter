@@ -7,6 +7,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "../road_fighter/Score.h"
+#include "../road_fighter/Transformation.h"
 #include <iostream>
 #include <memory>
 #include <cmath>

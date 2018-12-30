@@ -63,6 +63,7 @@ int main() {
         g.spawnPassableCar();
         g.checkCollisions();
         g.cleanEntities();
+        g.checkEnd();
         sf::Event event;
         while (window->pollEvent(event))
         {

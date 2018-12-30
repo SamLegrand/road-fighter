@@ -6,10 +6,10 @@
 
 using namespace road_fighter;
 
-Game::Game(const shared_ptr<EntityFactory> &f) : factory(f), world(f->createWorld()) {
+Game::Game(const shared_ptr<EntityFactory> &f) : factory(f), world(f->createWorld()), gameEnd(false) {
     world->setPlayer(factory->createPlayerCar());
     world->setLength(60);
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 3; ++i) {
         world->addRacingCar(factory->createRacingCar());
     }
 }
@@ -19,7 +19,9 @@ void Game::drawEntities() {
 }
 
 void Game::handleInputWorld() {
-    world->handleInput();
+    if (!gameEnd) {
+        world->handleInput();
+    }
 }
 
 void Game::handleMovement() {
@@ -44,4 +46,10 @@ void Game::spawnBullet() {
 
 void Game::cleanEntities() {
     world->cleanEntities();
+}
+
+void Game::checkEnd() {
+    if (world->getYPos() - 3 >= world->getLength()) {
+        gameEnd = true;
+    }
 }

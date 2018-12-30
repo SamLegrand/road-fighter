@@ -25,10 +25,12 @@ namespace road_fighter {
         void checkCollisions();
         void spawnBullet();
         void cleanEntities();
+        void checkEnd();
 
     private:
         shared_ptr<EntityFactory> factory;  // Factory for entity creation
         unique_ptr<World> world;    // Game world
+        bool gameEnd;
     };
 }
 

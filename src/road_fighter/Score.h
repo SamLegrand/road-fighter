@@ -6,6 +6,11 @@
 #define ROAD_FIGHTER_SCORE_H
 
 #include "Observer.h"
+#include <fstream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+#include <sstream>
 
 namespace road_fighter {
     class Score : public Observer {
@@ -15,10 +20,16 @@ namespace road_fighter {
 
         // Update and display functions
         void update(const double& change) final;
+        void update(const string& event) final;
+        void readScores();
+        void writeScores();
         virtual void display() = 0;
 
     protected:
         double score;   // The current score to display
+        vector<unsigned int> scores;
+        bool endVisual;
+        bool highScore;
     };
 }
 

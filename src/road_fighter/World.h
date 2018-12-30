@@ -28,6 +28,7 @@ namespace road_fighter {
         void addObserver(const shared_ptr<Score>& observer);
         void removeObserver(const shared_ptr<Score>& observer);
         void notifyObservers(const double& scoreChange);
+        void notifyObservers(const string& event);
 
         // Functions for adding certain types of entities
         void addEntity(shared_ptr<Entity> entity);
