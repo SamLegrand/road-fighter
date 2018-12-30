@@ -20,10 +20,10 @@ namespace road_fighter_SFML {
         EntityFactorySFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Creator functions returning base class pointers
-        unique_ptr<road_fighter::Bullet> createBullet() override;
+        shared_ptr<road_fighter::Bullet> createBullet() override;
         unique_ptr<road_fighter::PlayerCar> createPlayerCar() override;
-        unique_ptr<road_fighter::PassableCar> createPassableCar() override;
-        unique_ptr<road_fighter::RacingCar> createRacingCar() override;
+        shared_ptr<road_fighter::PassableCar> createPassableCar() override;
+        shared_ptr<road_fighter::RacingCar> createRacingCar() override;
         unique_ptr<road_fighter::World> createWorld() override;
 
     private:

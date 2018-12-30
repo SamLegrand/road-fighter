@@ -29,10 +29,10 @@ namespace road_fighter {
         void notifyObservers(const double& scoreChange);
 
         // Functions for adding certain types of entities
-        void addEntity(unique_ptr<Entity> entity);
-        void removeEntity(const unique_ptr<Entity>& entity);
+        void addEntity(shared_ptr<Entity> entity);
+        void removeEntity(const shared_ptr<Entity>& entity);
         void setPlayer(unique_ptr<PlayerCar> entity);
-        bool addPassableCar(unique_ptr<Entity> entity);
+        bool addPassableCar(shared_ptr<Entity> entity);
 
         // Functions handling display, input and movement of entities and world
         void draw() override;
@@ -45,7 +45,7 @@ namespace road_fighter {
         void checkCollisions();
 
         // Creating of bullets for shooting and entity cleanup
-        void spawnBullet(unique_ptr<Entity> entity);
+        void spawnBullet(shared_ptr<Entity> entity);
         void cleanEntities();
 
         // Virtual function for displaying the world (implemented by SFML)
@@ -53,7 +53,7 @@ namespace road_fighter {
 
     private:
         vector<shared_ptr<Score>> observers;    // List of observers
-        vector<unique_ptr<Entity>> entities;    // List of entities
+        vector<shared_ptr<Entity>> entities;    // List of entities
         unique_ptr<PlayerCar> player;           // Points to the player
     };
 }

@@ -22,11 +22,9 @@ namespace road_fighter {
         // Information needed by world
         double getMovementSpeed() const;
         bool canShoot() const;
-        bool hasBullets() const;
 
         // Setters needed for world
         // Handles when shooting and accelerating is allowed
-        void addBullets();
         void setBlockShoot(const bool& b);
         void setSpeed(const double& s);
         void setMotorDisabled(const unsigned int& time);
@@ -39,8 +37,6 @@ namespace road_fighter {
         bool notMovingX;    // Boolean for handling slowdown
         bool notMovingY;    // Boolean for handling slowdown
         bool blockShoot;    // Blocks shooting (only able to shoot once per press)
-        unsigned int ammo;  // Requires ammo to shoot
-        unsigned int maxAmmo;   // Ammo capacity
         unsigned int motorDisabledTime; // Time that acceleration should not be allowed
     };
 }

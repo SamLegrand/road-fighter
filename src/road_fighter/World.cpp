@@ -21,17 +21,17 @@ void World::removeObserver(const shared_ptr<Score>& observer) {
     observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
 }
 
-void World::addEntity(unique_ptr<road_fighter::Entity> entity) {
+void World::addEntity(shared_ptr<road_fighter::Entity> entity) {
     entities.emplace_back(move(entity));
 }
 
-void World::removeEntity(const unique_ptr<road_fighter::Entity> &entity) {
+void World::removeEntity(const shared_ptr<road_fighter::Entity> &entity) {
     entities.erase(std::remove(entities.begin(), entities.end(), entity), entities.end());
 }
 
 void World::draw() {
     drawSelf();
-    for (const unique_ptr<Entity>& e : entities) {
+    for (const shared_ptr<Entity>& e : entities) {
         e->draw();
     }
     player->draw();
@@ -42,14 +42,14 @@ void World::draw() {
 
 void World::handleInputEntities() {
     player->handleInput();
-    for (const unique_ptr<Entity>& e : entities) {
+    for (const shared_ptr<Entity>& e : entities) {
         e->handleInput();
     }
 }
 
 void World::handleMovement() {
     player->handleMovement();
-    for (const unique_ptr<Entity>& e : entities) {
+    for (const shared_ptr<Entity>& e : entities) {
         e->handleMovement();
     }
     double movementSpeed = player->getMovementSpeed();
@@ -62,7 +62,7 @@ void World::handleMovement() {
 }
 
 void World::scrollWorld(const double& speed) {
-    for (const unique_ptr<Entity>& e : entities) {
+    for (const shared_ptr<Entity>& e : entities) {
         e->scroll(speed);
     }
     scroll(speed);
@@ -134,8 +134,8 @@ bool World::areColliding(const road_fighter::Entity &e1, const road_fighter::Ent
         || e1.getXPos() + e1.getWidth() < e2.getXPos() || e1.getXPos() > e2.getXPos() + e2.getWidth()));
 }
 
-bool World::addPassableCar(unique_ptr<road_fighter::Entity> entity) {
-    for (const unique_ptr<Entity>& e : entities) {
+bool World::addPassableCar(shared_ptr<road_fighter::Entity> entity) {
+    for (const shared_ptr<Entity>& e : entities) {
         if (areColliding(*entity, *e)) {
             return false;
         }
@@ -147,10 +147,10 @@ bool World::addPassableCar(unique_ptr<road_fighter::Entity> entity) {
     return true;
 }
 
-void World::spawnBullet(unique_ptr<Entity> entity) {
+void World::spawnBullet(shared_ptr<Entity> entity) {
     if (player->canShoot()) {
         entity->updatePos(player->getXPos() + player->getWidth()/2 - entity->getWidth()/2, player->getYPos() - entity->getHeight());
-        for (const unique_ptr<Entity>& e : entities) {
+        for (const shared_ptr<Entity>& e : entities) {
             if (areColliding(*entity, *e)) {
                 return;
             }

@@ -16,10 +16,10 @@ namespace road_fighter {
     // Abstract base class for entity factory
     class EntityFactory {
     public:
-        virtual unique_ptr<Bullet> createBullet() = 0;
-        virtual unique_ptr<PassableCar> createPassableCar() = 0;
+        virtual shared_ptr<Bullet> createBullet() = 0;
+        virtual shared_ptr<PassableCar> createPassableCar() = 0;
         virtual unique_ptr<PlayerCar> createPlayerCar() = 0;
-        virtual unique_ptr<RacingCar> createRacingCar() = 0;
+        virtual shared_ptr<RacingCar> createRacingCar() = 0;
         virtual unique_ptr<World> createWorld() = 0;
     };
 }
