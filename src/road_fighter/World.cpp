@@ -34,9 +34,6 @@ void World::draw() {
     for (const shared_ptr<Entity>& e : entities) {
         e->draw();
     }
-    for (const shared_ptr<RacingCar>& r : racingcars) {
-        r->draw();
-    }
     player->draw();
     for (const shared_ptr<Score>& observer : observers) {
         observer->display();
@@ -55,9 +52,6 @@ void World::handleMovement() {
     for (const shared_ptr<Entity>& e : entities) {
         e->handleMovement();
     }
-    for (const shared_ptr<RacingCar>& r : racingcars) {
-        r->handleMovement();
-    }
     double movementSpeed = player->getMovementSpeed();
     if (movementSpeed != 0 && yPos >= -3) {
         scrollWorld(movementSpeed);
@@ -71,9 +65,6 @@ void World::scrollWorld(const double& speed) {
     for (const shared_ptr<Entity>& e : entities) {
         e->scroll(speed);
     }
-    for (const shared_ptr<RacingCar>& r : racingcars) {
-        r->scroll(speed);
-    }
     scroll(speed);
     notifyObservers(-speed*2);
 }
@@ -83,55 +74,61 @@ void World::setPlayer(unique_ptr<road_fighter::PlayerCar> entity) {
 }
 
 void World::checkCollisions() {
-//    vector<unique_ptr<road_fighter::Entity>> myEntities = entities;
+//    vector<shared_ptr<road_fighter::Entity>> myEntities = entities;
     set<size_t, greater<>> toErase;
     for (size_t i = 0; i < entities.size(); ++i) {
         if (entities[i]->getType() == "Bullet") {
             for (size_t j = 0; j < entities.size(); ++j) {
                 if (entities[i] != entities[j] && areColliding(*entities[i], *entities[j])) {
                     cout << entities[i]->getType() << " colliding with " << entities[j]->getType() << endl;
+                    if (entities[j]->getType() == "RacingCar") {
+                        shared_ptr<RacingCar> r = dynamic_pointer_cast<RacingCar>(entities[j]);
+                        r->setSpeed(0);
+                    }
+                    else {
+                        toErase.insert(j);
+                        notifyObservers(200);
+                    }
                     toErase.insert(i);
-                    toErase.insert(j);
-                    notifyObservers(200);
+                }
+            }
+        }
+        if (entities[i]->getType() == "RacingCar") {
+            shared_ptr<RacingCar> r = dynamic_pointer_cast<RacingCar>(entities[i]);
+            if (areColliding(*r, *player)) {
+                if (r->getYPos() < player->getYPos()) {
+                    r->setSpeed(-0.02);
+                }
+                else {
+                    r->setSpeed(0.01);
+                }
+            }
+            for (const shared_ptr<Entity>& e : entities) {
+                if (entities[i] != e && areColliding(*entities[i], *e)) {
+                    cout << entities[i]->getType() << " colliding with " << e->getType() << endl;
+                    if (e->getType() == "Truck") {
+                        r->setMotorDisabled(60);
+                        if (r->getYPos() < e->getYPos()) {
+                            r->setSpeed(-0.04);
+                        }
+                        else {
+                            r->setSpeed(0.02);
+                        }
+                    }
+                    if (e->getType() == "Taxi") {
+                        if (r->getYPos() < e->getYPos()) {
+                            r->setSpeed(-0.02);
+                        }
+                        else {
+                            r->setSpeed(0.01);
+                        }
+                    }
                 }
             }
         }
     }
     for (const size_t& index : toErase) {
         entities.erase(entities.begin() + index);
-    }
-    for (const shared_ptr<RacingCar>& r : racingcars) {
-        if (areColliding(*r, *player)) {
-            if (r->getYPos() < player->getYPos()) {
-                r->setSpeed(-0.04);
-                player->setSpeed(0.02);
-            }
-            else {
-                r->setSpeed(0.02);
-                player->setSpeed(-0.04);
-            }
-        }
-        for (const shared_ptr<Entity> &e : entities) {
-            if (areColliding(*r, *e)) {
-                if (e->getType() == "Truck") {
-                    r->setMotorDisabled(60);
-                    if (r->getYPos() < e->getYPos()) {
-                        r->setSpeed(-0.04);
-                    }
-                    else {
-                        r->setSpeed(0.02);
-                    }
-                }
-                if (e->getType() == "Taxi") {
-                    if (r->getYPos() < e->getYPos()) {
-                        r->setSpeed(-0.02);
-                    }
-                    else {
-                        r->setSpeed(0.01);
-                    }
-                }
-            }
-        }
     }
     for (const shared_ptr<Entity>& e : entities) {
         if (areColliding(*player, *e)) {
@@ -146,7 +143,7 @@ void World::checkCollisions() {
                     player->setSpeed(0.02);
                 }
             }
-            if (e->getType() == "Taxi") {
+            if (e->getType() == "Taxi" || e->getType() == "RacingCar") {
                 notifyObservers(-100);
                 if (player->getYPos() < e->getYPos()) {
                     player->setSpeed(-0.02);
@@ -157,40 +154,6 @@ void World::checkCollisions() {
             }
         }
     }
-//    for (size_t i = 0; i < entities.size(); ++i) {
-//        if (areColliding(*player, *entities[i])) {
-//            cout << "Player colliding with " << entities[i]->getType() << endl;
-//            if (entities[i]->getType() == "Truck") {
-//                notifyObservers(-100);
-//                player->setMotorDisabled(60);
-//                if (player->getYPos() < entities[i]->getYPos()) {
-//                    player->setSpeed(-0.04);
-//                }
-//                else {
-//                    player->setSpeed(0.02);
-//                }
-//            }
-//            if (entities[i]->getType() == "Taxi") {
-//                notifyObservers(-100);
-//                if (player->getYPos() < entities[i]->getYPos()) {
-//                    player->setSpeed(-0.02);
-//                }
-//                else {
-//                    player->setSpeed(0.01);
-//                }
-//            }
-//            entities.erase(entities.begin() + i);
-//            continue;
-//        }
-//        ++i;
-//    }
-//    for (const unique_ptr<Entity>& e : entities) {
-//        if (areColliding(*player, *e)) {
-//            cout << "Player colliding with " << &e << endl;
-//            entities.erase(remove(entities.begin(), entities.end(), e), entities.end());
-//            break;
-//        }
-//    }
 }
 
 bool World::areColliding(const road_fighter::Entity &e1, const road_fighter::Entity &e2) {
@@ -228,15 +191,17 @@ void World::spawnBullet(shared_ptr<Entity> entity) {
 
 void World::cleanEntities() {
     for (size_t i = 0; i < entities.size();) {
-        if (entities[i]->getYPos() + entities[i]->getHeight() < -3) {
-            if (entities[i]->getType() == "Bullet") {
+        if (entities[i]->getType() == "Bullet") {
+            if (entities[i]->getYPos() + entities[i]->getHeight() < -3) {
                 entities.erase(entities.begin() + i);
                 continue;
             }
         }
-        if (entities[i]->getYPos() + entities[i]->getHeight() < -30 || entities[i]->getYPos() > 30) {
-            entities.erase(entities.begin() + i);
-            continue;
+        if (entities[i]->getType() != "RacingCar") {
+            if (entities[i]->getYPos() + entities[i]->getHeight() < -30 || entities[i]->getYPos() > 30) {
+                entities.erase(entities.begin() + i);
+                continue;
+            }
         }
         ++i;
     }
@@ -249,5 +214,18 @@ void World::notifyObservers(const double& scoreChange) {
 }
 
 void World::addRacingCar(const shared_ptr<RacingCar>& racingcar) {
-    racingcars.emplace_back(racingcar);
+    bool colliding = true;
+    while (areColliding(*racingcar, *player) || colliding) {
+        colliding = false;
+        racingcar->updatePos(Random::getInstance().getRandom(leftBound, rightBound - racingcar->getWidth()), Random::getInstance().getRandom(-3, 3));
+        for (const shared_ptr<Entity>& e : entities) {
+            if (e->getType() == "RacingCar") {
+                if (areColliding(*racingcar, *e)) {
+                    colliding = true;
+                    break;
+                }
+            }
+        }
+    }
+    entities.emplace_back(racingcar);
 }

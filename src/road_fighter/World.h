@@ -56,7 +56,6 @@ namespace road_fighter {
     private:
         vector<shared_ptr<Score>> observers;    // List of observers
         vector<shared_ptr<Entity>> entities;    // List of other entities
-        vector<shared_ptr<RacingCar>> racingcars;       // List of racing cars
         unique_ptr<PlayerCar> player;           // Points to the player
     };
 }
