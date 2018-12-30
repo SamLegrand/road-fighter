@@ -10,6 +10,7 @@
 #include "PlayerCar.h"
 #include "Random.h"
 #include "Bullet.h"
+#include "RacingCar.h"
 #include <vector>
 #include <memory>
 #include <algorithm>
@@ -33,6 +34,7 @@ namespace road_fighter {
         void removeEntity(const shared_ptr<Entity>& entity);
         void setPlayer(unique_ptr<PlayerCar> entity);
         bool addPassableCar(shared_ptr<Entity> entity);
+        void addRacingCar(const shared_ptr<RacingCar>& racingcar);
 
         // Functions handling display, input and movement of entities and world
         void draw() override;
@@ -53,7 +55,8 @@ namespace road_fighter {
 
     private:
         vector<shared_ptr<Score>> observers;    // List of observers
-        vector<shared_ptr<Entity>> entities;    // List of entities
+        vector<shared_ptr<Entity>> entities;    // List of other entities
+        vector<shared_ptr<RacingCar>> racingcars;       // List of racing cars
         unique_ptr<PlayerCar> player;           // Points to the player
     };
 }

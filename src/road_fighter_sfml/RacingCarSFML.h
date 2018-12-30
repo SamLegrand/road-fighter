@@ -6,11 +6,22 @@
 #define ROAD_FIGHTER_RACINGCARSFML_H
 
 #include "../road_fighter/RacingCar.h"
+#include <SFML/Graphics.hpp>
 
 namespace road_fighter_SFML {
     class RacingCarSFML : public road_fighter::RacingCar {
-        void draw() override {};
+    public:
+        // Constructors
+        RacingCarSFML();
+        RacingCarSFML(const shared_ptr<sf::RenderWindow>& w);
+
+        void draw() override;
         void handleInput() override {};
+
+    private:
+        sf::Texture texture;    // Texture
+        sf::Sprite sprite;      // Sprite to render
+        shared_ptr<sf::RenderWindow> window;    // Window to render to
     };
 }
 
