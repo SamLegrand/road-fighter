@@ -31,6 +31,7 @@ namespace road_fighter {
         double getWidth() const;
         double getHeight() const;
         const string &getType() const;
+        void setHeight(const double& h);
 
     protected:
         double xPos;    // Current horizontal position

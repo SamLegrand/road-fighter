@@ -8,6 +8,7 @@ using namespace road_fighter;
 
 Game::Game(const shared_ptr<EntityFactory> &f) : factory(f), world(f->createWorld()) {
     world->setPlayer(factory->createPlayerCar());
+    world->setLength(60);
     for (int i = 0; i < 5; ++i) {
         world->addRacingCar(factory->createRacingCar());
     }

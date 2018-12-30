@@ -38,3 +38,7 @@ double Entity::getHeight() const {
 const string &Entity::getType() const {
     return type;
 }
+
+void Entity::setHeight(const double &h) {
+    height = h;
+}

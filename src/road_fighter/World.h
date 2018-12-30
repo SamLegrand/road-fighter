@@ -52,11 +52,14 @@ namespace road_fighter {
 
         // Virtual function for displaying the world (implemented by SFML)
         virtual void drawSelf() = 0;
+        void setLength(const double& length);
+        double getLength() const;
 
     private:
         vector<shared_ptr<Score>> observers;    // List of observers
         vector<shared_ptr<Entity>> entities;    // List of other entities
         unique_ptr<PlayerCar> player;           // Points to the player
+        double length;
     };
 }
 

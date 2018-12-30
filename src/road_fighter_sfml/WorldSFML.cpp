@@ -10,6 +10,9 @@ WorldSFML::WorldSFML() : World(), roadTexture(sf::Texture()), roadSprite1(sf::Sp
     if (!roadTexture.loadFromFile("../graphics/Road.png")) {
         cerr << "Loading texture for road failed." << endl;
     }
+    if (!finishTexture.loadFromFile("../graphics/Finish.png")) {
+        cerr << "Loading texture for road failed." << endl;
+    }
     roadSprite1.setTexture(roadTexture);
     double w = width;
     double h = height;
@@ -26,6 +29,18 @@ WorldSFML::WorldSFML(const shared_ptr<sf::RenderWindow>& w) : WorldSFML() {
 }
 
 void WorldSFML::drawSelf() {
+    if (yPos + 3 >= getLength()) {
+        roadSprite2.setTexture(finishTexture);
+    }
+    if (yPos + 3 < getLength()) {
+        roadSprite2.setTexture(roadTexture);
+    }
+    if (yPos >= getLength()) {
+        roadSprite1.setTexture(finishTexture);
+    }
+    if (yPos < getLength()) {
+        roadSprite1.setTexture(roadTexture);
+    }
     double w = width;
     double h = height;
     road_fighter::Transformation::getInstance().dimensionsToRes(w, h);

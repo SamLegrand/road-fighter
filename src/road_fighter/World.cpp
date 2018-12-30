@@ -53,7 +53,7 @@ void World::handleMovement() {
         e->handleMovement();
     }
     double movementSpeed = player->getMovementSpeed();
-    if (movementSpeed != 0 && yPos >= -3) {
+    if (movementSpeed != 0 && yPos >= -3 && yPos - 4 <= length) {
         scrollWorld(movementSpeed);
     }
     if (yPos < -3) {
@@ -228,4 +228,12 @@ void World::addRacingCar(const shared_ptr<RacingCar>& racingcar) {
         }
     }
     entities.emplace_back(racingcar);
+}
+
+void World::setLength(const double &l) {
+    length = l;
+}
+
+double World::getLength() const {
+    return length;
 }
