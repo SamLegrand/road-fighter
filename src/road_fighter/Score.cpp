@@ -23,7 +23,7 @@ void Score::update(const string &event) {
         auto it = std::lower_bound(scores.begin(), scores.end(), score, std::greater<>());
         scores.insert(it, static_cast<unsigned int>(round(score)));
         if (scores.size() > 10) {
-            scores.erase(scores.begin());
+            scores.pop_back();
         }
         if (scores.front() == static_cast<unsigned int>(round(score))) {
             highScore = true;

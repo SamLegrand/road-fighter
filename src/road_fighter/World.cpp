@@ -10,6 +10,7 @@ World::World() : Entity(8, 6) {
     xPos = -4;
     yPos = -3;
     type = "World";
+    gameEnd = false;
 }
 
 void World::addObserver(const shared_ptr<Score>& observer) {
@@ -98,7 +99,7 @@ void World::checkCollisions() {
         }
         if (entities[i]->getType() == "RacingCar") {
             shared_ptr<RacingCar> r = dynamic_pointer_cast<RacingCar>(entities[i]);
-            if (areColliding(*r, *player)) {
+            if (areColliding(*r, *player) && !gameEnd) {
                 if (r->getYPos() < player->getYPos()) {
                     r->setSpeed(-0.02);
                 }
@@ -133,26 +134,28 @@ void World::checkCollisions() {
     for (const size_t& index : toErase) {
         entities.erase(entities.begin() + index);
     }
-    for (const shared_ptr<Entity>& e : entities) {
-        if (areColliding(*player, *e)) {
-            cout << "Player colliding with " << e->getType() << endl;
-            if (e->getType() == "Truck") {
-                notifyObservers(-100);
-                player->setMotorDisabled(60);
-                if (player->getYPos() < e->getYPos()) {
-                    player->setSpeed(-0.04);
+    if (!gameEnd) {
+        for (const shared_ptr<Entity>& e : entities) {
+            if (areColliding(*player, *e)) {
+                cout << "Player colliding with " << e->getType() << endl;
+                if (e->getType() == "Truck") {
+                    notifyObservers(-100);
+                    player->setMotorDisabled(60);
+                    if (player->getYPos() < e->getYPos()) {
+                        player->setSpeed(-0.04);
+                    }
+                    else {
+                        player->setSpeed(0.02);
+                    }
                 }
-                else {
-                    player->setSpeed(0.02);
-                }
-            }
-            if (e->getType() == "Taxi" || e->getType() == "RacingCar") {
-                notifyObservers(-100);
-                if (player->getYPos() < e->getYPos()) {
-                    player->setSpeed(-0.02);
-                }
-                else {
-                    player->setSpeed(0.01);
+                if (e->getType() == "Taxi" || e->getType() == "RacingCar") {
+                    notifyObservers(-100);
+                    if (player->getYPos() < e->getYPos()) {
+                        player->setSpeed(-0.02);
+                    }
+                    else {
+                        player->setSpeed(0.01);
+                    }
                 }
             }
         }
@@ -245,4 +248,8 @@ void World::notifyObservers(const string &event) {
     for (const shared_ptr<Score>& observer : observers) {
         observer->update(event);
     }
+}
+
+void World::setGameEnd(bool gameEnd) {
+    World::gameEnd = gameEnd;
 }

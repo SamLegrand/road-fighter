@@ -56,11 +56,16 @@ namespace road_fighter {
         void setLength(const double& length);
         double getLength() const;
 
+        // Setter for when game ends (no collision control for player when game ends)
+        void setGameEnd(bool gameEnd);
+
+
     private:
         vector<shared_ptr<Score>> observers;    // List of observers
         vector<shared_ptr<Entity>> entities;    // List of other entities
         unique_ptr<PlayerCar> player;           // Points to the player
         double length;
+        bool gameEnd;
     };
 }
 

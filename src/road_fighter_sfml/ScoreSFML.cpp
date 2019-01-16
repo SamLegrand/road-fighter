@@ -29,7 +29,7 @@ void ScoreSFML::display() {
         text.setCharacterSize(80);
         text.setOutlineColor(sf::Color::Red);
         text.setOutlineThickness(2);
-        text.setPosition(static_cast<float>(x) - fr.width/2, static_cast<float>(y));
+        text.setPosition(static_cast<float>(x) - fr.width/2, static_cast<float>(y) - 100);
         if (highScore) {
             sf::Text highScoreText;
             highScoreText.setString("HIGH SCORE!");
@@ -39,12 +39,12 @@ void ScoreSFML::display() {
             highScoreText.setOutlineColor(sf::Color::Yellow);
             highScoreText.setOutlineThickness(1.5f);
             highScoreText.setStyle(sf::Text::Bold);
-            highScoreText.setPosition(static_cast<float>(x) - highScoreText.getGlobalBounds().width/2, static_cast<float>(y) - 40);
+            highScoreText.setPosition(static_cast<float>(x) - highScoreText.getGlobalBounds().width/2, static_cast<float>(y) - 140);
             window->draw(highScoreText);
         }
         sf::Text hallOfFame;
         hallOfFame.setFont(font);
-        hallOfFame.setCharacterSize(50);
+        hallOfFame.setCharacterSize(40);
         hallOfFame.setFillColor(sf::Color::White);
         hallOfFame.setStyle(sf::Text::Bold);
         hallOfFame.setOutlineColor(sf::Color::Black);
@@ -58,7 +58,7 @@ void ScoreSFML::display() {
                 hallOfFame.setOutlineColor(sf::Color::Black);
             }
             hallOfFame.setString(to_string(counter) + ". " + to_string(s));
-            hallOfFame.setPosition(static_cast<float>(x) - hallOfFame.getGlobalBounds().width/2, static_cast<float>(y) + 30 + 50 * counter);
+            hallOfFame.setPosition(static_cast<float>(x) - hallOfFame.getGlobalBounds().width/2, static_cast<float>(y) - 50 + 40 * counter);
             window->draw(hallOfFame);
             ++counter;
         }

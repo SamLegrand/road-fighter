@@ -51,5 +51,6 @@ void Game::cleanEntities() {
 void Game::checkEnd() {
     if (world->getYPos() - 3 >= world->getLength()) {
         gameEnd = true;
+        world->setGameEnd(true);
     }
 }
