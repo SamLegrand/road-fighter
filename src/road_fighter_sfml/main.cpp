@@ -19,28 +19,16 @@ int main() {
     // Pass window to game (for draw calls)
     GameSFML g(window);
 
-    // Timer for framerate lock
-    steady_clock::time_point fpsTimer(steady_clock::now());
-    duration<double, ratio<1, 60>> FPS{};
-
-    using frames = duration<int64_t, ratio<1, 62>>;
-    auto nextFrame = steady_clock::now() + frames{0};
+    // Frame duration for framerate lock
+    using clock = steady_clock;
+    using frames = duration<int64_t , ratio<1, 60>>;
+    auto nextFrame = clock::now() + frames{0};
 
     // Main game loop
     while (window->isOpen())
     {
-        // Perform intersection test
-
         // Lock framerate to 60FPS (one tick every 1/60th of a second)
-        FPS = duration_cast<duration<int32_t, ratio<1, 60>>>(steady_clock::now() - fpsTimer);
-        if (FPS.count() > 0) {
-            nextFrame += frames{1};
-            fpsTimer = steady_clock::now();
-            window->clear();
-            g.drawEntities();
-            window->display();
-            g.executeTick();
-
+        if (clock::now() >= nextFrame) {
             // Event for checking on application close (close with escape or close button)
             unique_ptr<sf::Event> event = make_unique<sf::Event>(sf::Event());
             while (window->pollEvent(*event))
@@ -53,8 +41,14 @@ int main() {
                     }
                 }
             }
-            // Sleep for duration to reduce cpu load, although very rarely causes slight hitching
-            this_thread::sleep_until(nextFrame);
+            g.executeTick();
+            window->clear();
+            g.drawEntities();
+            window->display();
+
+            // Sleep for duration to reduce cpu load, although rarely causes slight hitching
+            nextFrame += frames{1};
+            this_thread::sleep_until(nextFrame - 2ms);
         }
     }
     return 0;

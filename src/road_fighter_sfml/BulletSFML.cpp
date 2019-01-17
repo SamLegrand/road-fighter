@@ -7,6 +7,7 @@
 using namespace road_fighter_SFML;
 
 BulletSFML::BulletSFML() : Bullet(0.1, 0.3) {
+    // Load texture data
     if (!texture.loadFromFile("../graphics/Bullet.png")) {
         cerr << "Loading texture for PlayerCar failed." << endl;
     }

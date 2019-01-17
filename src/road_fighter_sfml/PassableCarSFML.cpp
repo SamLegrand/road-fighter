@@ -7,6 +7,7 @@
 using namespace road_fighter_SFML;
 
 PassableCarSFML::PassableCarSFML() : PassableCar(0.4, 0.8) {
+    // Load texture data
     if (!texture.loadFromFile("../graphics/" + type + ".png")) {
         cerr << "Loading texture for PlayerCar failed." << endl;
     }
