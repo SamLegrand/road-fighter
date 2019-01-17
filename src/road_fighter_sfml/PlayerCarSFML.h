@@ -11,7 +11,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include "ScaleSFML.h"
+#include "HelperSFML.h"
 
 using namespace std;
 

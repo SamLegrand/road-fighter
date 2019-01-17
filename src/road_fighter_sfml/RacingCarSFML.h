@@ -7,7 +7,7 @@
 
 #include "../road_fighter/RacingCar.h"
 #include <SFML/Graphics.hpp>
-#include "ScaleSFML.h"
+#include "HelperSFML.h"
 
 namespace road_fighter_SFML {
     class RacingCarSFML : public road_fighter::RacingCar {

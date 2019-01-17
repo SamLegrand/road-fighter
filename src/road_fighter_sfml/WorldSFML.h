@@ -9,7 +9,7 @@
 #include "../road_fighter/World.h"
 #include "ScoreSFML.h"
 #include "../road_fighter/Score.h"
-#include "ScaleSFML.h"
+#include "HelperSFML.h"
 
 namespace road_fighter_SFML {
     class WorldSFML : public road_fighter::World {

@@ -14,16 +14,13 @@ RacingCarSFML::RacingCarSFML() : RacingCar(), texture(sf::Texture()), sprite(sf:
     sprite.setTexture(texture);
 
     // Scale sprite properly
-    ScaleSFML::getInstance().scaleSprite(sprite, width, height);
+    HelperSFML::getInstance().scaleSprite(sprite, width, height);
 }
 
 void RacingCarSFML::draw() {
     // Don't execute draw calls when car is not on screen
     if (yPos + height >= -3 && yPos <= 3) {
-        double x = xPos;
-        double y = yPos;
-        road_fighter::Transformation::getInstance().coordinatesToRes(x, y);
-        sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
+        HelperSFML::getInstance().setSpritePosition(sprite, xPos, yPos);
         window->draw(sprite);
     }
 }

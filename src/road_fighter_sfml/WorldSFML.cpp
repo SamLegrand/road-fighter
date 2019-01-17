@@ -18,12 +18,12 @@ WorldSFML::WorldSFML() : World(), roadTexture(sf::Texture()), roadSprite1(sf::Sp
     finishSprite.setTexture(finishTexture);
 
     // Properly scale world sprite
-    ScaleSFML::getInstance().scaleSprite(roadSprite1, width, height);
+    HelperSFML::getInstance().scaleSprite(roadSprite1, width, height);
     roadSprite2 = roadSprite1;
 
     // Properly scale finish line sprite
     double width = rightBound - leftBound;
-    ScaleSFML::getInstance().scaleSprite(finishSprite, width);
+    HelperSFML::getInstance().scaleSprite(finishSprite, width);
 }
 
 // WorldSFML constructor
@@ -50,10 +50,11 @@ void WorldSFML::drawSelf() {
 
     // Draw finish line (no draw calls when not on screen)
     if (yPos + height >= getLength()) {
-        double l = leftBound;
-        double finishY = yPos - getLength();
-        road_fighter::Transformation::getInstance().coordinatesToRes(l, finishY);
-        finishSprite.setPosition(static_cast<float>(l), static_cast<float>(finishY));
+        HelperSFML::getInstance().setSpritePosition(finishSprite, leftBound, yPos - getLength());
+//        double l = leftBound;
+//        double finishY = yPos - getLength();
+//        road_fighter::Transformation::getInstance().coordinatesToRes(l, finishY);
+//        finishSprite.setPosition(static_cast<float>(l), static_cast<float>(finishY));
         window->draw(finishSprite);
     }
 }

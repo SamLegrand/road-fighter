@@ -13,7 +13,7 @@ BulletSFML::BulletSFML() : Bullet(0.1, 0.3) {
     sprite.setTexture(texture);
 
     // Properly scale sprite
-    ScaleSFML::getInstance().scaleSprite(sprite, width, height);
+    HelperSFML::getInstance().scaleSprite(sprite, width, height);
 }
 
 BulletSFML::BulletSFML(const shared_ptr<sf::RenderWindow> &w) : BulletSFML() {
@@ -23,10 +23,7 @@ BulletSFML::BulletSFML(const shared_ptr<sf::RenderWindow> &w) : BulletSFML() {
 void BulletSFML::draw() {
     // Don't execute draw calls when bullet is not on screen
     if (yPos + height >= -3) {
-        double x = xPos;
-        double y = yPos;
-        road_fighter::Transformation::getInstance().coordinatesToRes(x, y);
-        sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
+        HelperSFML::getInstance().setSpritePosition(sprite, xPos, yPos);
         window->draw(sprite);
     }
 }
