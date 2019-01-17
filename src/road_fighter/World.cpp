@@ -57,8 +57,9 @@ void World::handleMovement() {
     if (movementSpeed != 0 && yPos >= -3 && yPos - 5 <= length) {
         scrollWorld(movementSpeed);
     }
-    if (yPos - player->getHeight() > length) {
+    if (yPos - player->getHeight() > length && !gameEnd) {
         gameEnd = true;
+        notifyObservers(getPositionScore());
         notifyObservers("GameEnd");
     }
     if (yPos < -3) {
@@ -71,7 +72,9 @@ void World::scrollWorld(const double& speed) {
         e->scroll(speed);
     }
     scroll(speed);
-    notifyObservers(-speed*2);
+    if (!gameEnd) {
+        notifyObservers(-speed*2);
+    }
 }
 
 void World::setPlayer(unique_ptr<road_fighter::PlayerCar> entity) {
@@ -253,4 +256,23 @@ void World::notifyObservers(const string &event) {
 
 bool World::isGameEnd() const {
     return gameEnd;
+}
+
+double World::getPositionScore() {
+    unsigned int position = 1;
+    for (const shared_ptr<Entity>& entity : entities) {
+        if (entity->getType() == "PassableCar") {
+            if (entity->getYPos() < player->getYPos()) {
+                ++position;
+            }
+        }
+    }
+    switch(position) {
+        default: return 0;
+        case 1: return 1000;
+        case 2: return 600;
+        case 3: return 300;
+        case 4: return 200;
+        case 5: return 100;
+    }
 }

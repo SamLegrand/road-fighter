@@ -47,6 +47,13 @@ void WorldSFML::drawSelf() {
     roadSprite2.setPosition(static_cast<float>(x), spriteY - static_cast<float>(h));
     window->draw(roadSprite1);
     window->draw(roadSprite2);
+    if (yPos + height >= getLength()) {
+        double l = leftBound;
+        double finishY = yPos - getLength(); //60 - 60 == 0 dus in midden van scherm
+        road_fighter::Transformation::getInstance().coordinatesToRes(l, finishY);
+        finishSprite.setPosition(static_cast<float>(l), static_cast<float>(finishY));
+        window->draw(finishSprite);
+    }
 }
 
 void WorldSFML::handleInput() {

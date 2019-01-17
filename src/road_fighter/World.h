@@ -58,6 +58,7 @@ namespace road_fighter {
 
         // Getter for when game ends (no collision control for player when game ends)
         bool isGameEnd() const;
+        double getPositionScore();
 
 
     private:
