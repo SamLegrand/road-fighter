@@ -10,10 +10,11 @@ WorldSFML::WorldSFML() : World(), roadTexture(sf::Texture()), roadSprite1(sf::Sp
     if (!roadTexture.loadFromFile("../graphics/Road.png")) {
         cerr << "Loading texture for road failed." << endl;
     }
-    if (!finishTexture.loadFromFile("../graphics/Finish.png")) {
-        cerr << "Loading texture for road failed." << endl;
+    if (!finishTexture.loadFromFile("../graphics/FinishLine.png")) {
+        cerr << "Loading texture for finish line failed." << endl;
     }
     roadSprite1.setTexture(roadTexture);
+    finishSprite.setTexture(finishTexture);
     double w = width;
     double h = height;
     road_fighter::Transformation::getInstance().dimensionsToRes(w, h);
@@ -21,6 +22,12 @@ WorldSFML::WorldSFML() : World(), roadTexture(sf::Texture()), roadSprite1(sf::Sp
     sf::Vector2f oldSize = static_cast<sf::Vector2f>(roadSprite1.getTexture()->getSize());
     roadSprite1.setScale(newSize.x/oldSize.x, newSize.y/oldSize.y);
     roadSprite2 = roadSprite1;
+
+    oldSize = static_cast<sf::Vector2f>(finishSprite.getTexture()->getSize());
+    w = rightBound - leftBound;
+    road_fighter::Transformation::getInstance().dimensionsToRes(w, h);
+    newSize = sf::Vector2f(static_cast<float>(w), static_cast<float>(h));
+    finishSprite.setScale(newSize.x/oldSize.x, newSize.x/oldSize.x);
 }
 
 WorldSFML::WorldSFML(const shared_ptr<sf::RenderWindow>& w) : WorldSFML() {
@@ -29,18 +36,6 @@ WorldSFML::WorldSFML(const shared_ptr<sf::RenderWindow>& w) : WorldSFML() {
 }
 
 void WorldSFML::drawSelf() {
-    if (yPos + 3 >= getLength()) {
-        roadSprite2.setTexture(finishTexture);
-    }
-    if (yPos + 3 < getLength()) {
-        roadSprite2.setTexture(roadTexture);
-    }
-    if (yPos >= getLength()) {
-        roadSprite1.setTexture(finishTexture);
-    }
-    if (yPos < getLength()) {
-        roadSprite1.setTexture(roadTexture);
-    }
     double w = width;
     double h = height;
     road_fighter::Transformation::getInstance().dimensionsToRes(w, h);

@@ -26,6 +26,7 @@ namespace road_fighter_SFML {
         sf::Texture finishTexture;  // Texture for finish line
         sf::Sprite roadSprite1;     // Sprite
         sf::Sprite roadSprite2;     // Second sprite to enable background looping
+        sf::Sprite finishSprite;    // Sprite for finish line
         shared_ptr<sf::RenderWindow> window;    // Window to render to
     };
 }

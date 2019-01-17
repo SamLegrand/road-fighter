@@ -24,9 +24,12 @@ BulletSFML::BulletSFML(const shared_ptr<sf::RenderWindow> &w) : BulletSFML() {
 }
 
 void BulletSFML::draw() {
-    double x = xPos;
-    double y = yPos;
-    road_fighter::Transformation::getInstance().coordinatesToRes(x, y);
-    sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
-    window->draw(sprite);
+    // Don't execute draw calls when bullet is not on screen
+    if (yPos + height >= -3) {
+        double x = xPos;
+        double y = yPos;
+        road_fighter::Transformation::getInstance().coordinatesToRes(x, y);
+        sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
+        window->draw(sprite);
+    }
 }

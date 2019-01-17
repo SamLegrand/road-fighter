@@ -57,7 +57,7 @@ void World::handleMovement() {
     if (movementSpeed != 0 && yPos >= -3 && yPos - 5 <= length) {
         scrollWorld(movementSpeed);
     }
-    if (yPos - 5 > length) {
+    if (yPos - player->getHeight() > length) {
         notifyObservers("GameEnd");
     }
     if (yPos < -3) {

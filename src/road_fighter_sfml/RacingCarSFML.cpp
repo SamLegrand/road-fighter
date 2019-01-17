@@ -20,11 +20,14 @@ RacingCarSFML::RacingCarSFML() : RacingCar(), texture(sf::Texture()), sprite(sf:
 }
 
 void RacingCarSFML::draw() {
-    double x = xPos;
-    double y = yPos;
-    road_fighter::Transformation::getInstance().coordinatesToRes(x, y);
-    sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
-    window->draw(sprite);
+    // Don't execute draw calls when car is not on screen
+    if (yPos + height >= -3 && yPos <= 3) {
+        double x = xPos;
+        double y = yPos;
+        road_fighter::Transformation::getInstance().coordinatesToRes(x, y);
+        sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
+        window->draw(sprite);
+    }
 }
 
 RacingCarSFML::RacingCarSFML(const shared_ptr<sf::RenderWindow>& w) : RacingCarSFML() {
