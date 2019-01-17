@@ -13,12 +13,13 @@ namespace road_fighter {
         // Constructor
         RacingCar();
 
+        // Movement
         void moveUp();
         void moveLeft();
         void moveRight();
         void handleMovement() override;
 
-
+        // Speed control
         void setSpeed(const double& s);
         void setMotorDisabled(const unsigned int& time);
 

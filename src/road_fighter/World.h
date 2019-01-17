@@ -34,14 +34,14 @@ namespace road_fighter {
         void addEntity(shared_ptr<Entity> entity);
         void removeEntity(const shared_ptr<Entity>& entity);
         void setPlayer(unique_ptr<PlayerCar> entity);
-        bool addPassableCar(shared_ptr<Entity> entity);
+        void addPassableCar(shared_ptr<Entity> entity);
         void addRacingCar(const shared_ptr<RacingCar>& racingcar);
 
         // Functions handling display, input and movement of entities and world
         void draw() override;
         void handleMovement() override;
         void scrollWorld(const double& speed);
-        void handleInputEntities();
+        void handleInput() override;
 
         // Collision control
         bool areColliding(const Entity& e1, const Entity& e2);

@@ -9,6 +9,7 @@
 #include "../road_fighter/World.h"
 #include "ScoreSFML.h"
 #include "../road_fighter/Score.h"
+#include "ScaleSFML.h"
 
 namespace road_fighter_SFML {
     class WorldSFML : public road_fighter::World {
@@ -19,7 +20,6 @@ namespace road_fighter_SFML {
 
         // Display and input functions
         void drawSelf() override;
-        void handleInput() override;
 
     private:
         sf::Texture roadTexture;    // Texture for road (main part of level)

@@ -7,6 +7,7 @@
 
 #include "../road_fighter/Bullet.h"
 #include <SFML/Graphics.hpp>
+#include "ScaleSFML.h"
 
 namespace road_fighter_SFML {
     class BulletSFML : public road_fighter::Bullet {

@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "../road_fighter/PassableCar.h"
+#include "ScaleSFML.h"
 
 namespace road_fighter_SFML {
     class PassableCarSFML : public road_fighter::PassableCar {

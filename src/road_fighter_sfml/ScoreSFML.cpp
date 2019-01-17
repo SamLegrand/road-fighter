@@ -7,6 +7,7 @@
 using namespace road_fighter_SFML;
 
 ScoreSFML::ScoreSFML(const shared_ptr<sf::RenderWindow>& w) : Score(), window(w) {
+    // Load and set all font data for score display
     if (!font.loadFromFile("../graphics/Font.ttf"))
     {
         cerr << "Couldn't load font data." << endl;
@@ -22,6 +23,7 @@ ScoreSFML::ScoreSFML(const shared_ptr<sf::RenderWindow>& w) : Score(), window(w)
 
 void ScoreSFML::display() {
     if (endVisual) {
+        // Add and change text data for high score view
         sf::FloatRect fr = text.getGlobalBounds();
         double x = 0;
         double y = 0;
@@ -42,6 +44,7 @@ void ScoreSFML::display() {
             highScoreText.setPosition(static_cast<float>(x) - highScoreText.getGlobalBounds().width/2, static_cast<float>(y) - 140);
             window->draw(highScoreText);
         }
+        // Generate score list view / hall of fame
         sf::Text hallOfFame;
         hallOfFame.setFont(font);
         hallOfFame.setCharacterSize(40);

@@ -21,15 +21,19 @@ namespace road_fighter {
         // Update and display functions
         void update(const double& change) final;
         void update(const string& event) final;
+
+        // File handling
         void readScores();
         void writeScores();
+
+        // Display (for draw call)
         virtual void display() = 0;
 
     protected:
         double score;   // The current score to display
-        vector<unsigned int> scores;
-        bool endVisual;
-        bool highScore;
+        vector<unsigned int> scores; // List of current scores save file
+        bool endVisual; // Signals game has ended to graphical library
+        bool highScore; // Signals to graphical library that current score is a high score
     };
 }
 

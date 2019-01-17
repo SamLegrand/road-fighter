@@ -11,12 +11,9 @@ BulletSFML::BulletSFML() : Bullet(0.1, 0.3) {
         cerr << "Loading texture for PlayerCar failed." << endl;
     }
     sprite.setTexture(texture);
-    double w = width;
-    double h = height;
-    road_fighter::Transformation::getInstance().dimensionsToRes(w, h);
-    sf::Vector2f newSize(static_cast<float>(w), static_cast<float>(h));
-    sf::Vector2f oldSize = static_cast<sf::Vector2f>(sprite.getTexture()->getSize());
-    sprite.setScale(newSize.x/oldSize.x, newSize.y/oldSize.y);
+
+    // Properly scale sprite
+    ScaleSFML::getInstance().scaleSprite(sprite, width, height);
 }
 
 BulletSFML::BulletSFML(const shared_ptr<sf::RenderWindow> &w) : BulletSFML() {

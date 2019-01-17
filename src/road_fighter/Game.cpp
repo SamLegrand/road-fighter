@@ -7,10 +7,10 @@
 using namespace road_fighter;
 
 Game::Game(const shared_ptr<EntityFactory> &f) : factory(f), world(f->createWorld()), gameEnd(false) {
-    world->setPlayer(factory->createPlayerCar());
-    world->setLength(100);
+    world->setPlayer(factory->createPlayerCar());   // Add player to world
+    world->setLength(200);  // Set level length
     for (int i = 0; i < 3; ++i) {
-        world->addRacingCar(factory->createRacingCar());
+        world->addRacingCar(factory->createRacingCar());    // Add RacingCars
     }
 }
 
@@ -33,14 +33,15 @@ void Game::checkCollisions() {
 }
 
 void Game::spawnPassableCar() {
-    double rnd = Random::getInstance().getRandom(0, 1);
-    unsigned int counter = 0;
-    if (rnd < 1/120.0) {
-        while (++counter < 3 && !world->addPassableCar(factory->createPassableCar()));
+    // Spawn passable car (randomly, 1 per 100 ticks on average)
+    double rnd = Random::getInstance().getRandom(0, 1); // Get random between 0 and 1
+    if (rnd < 1/100.0) {
+        world->addPassableCar(factory->createPassableCar());
     }
 }
 
 void Game::spawnBullet() {
+    // Generates a bullet which is given to world
     world->spawnBullet(factory->createBullet());
 }
 
@@ -52,4 +53,14 @@ void Game::checkEnd() {
     if (world->getYPos() >= world->getLength()) {
         gameEnd = world->isGameEnd();
     }
+}
+
+// Execute all procedures necessary per tick
+void Game::executeTick() {
+    handleInput();
+    handleMovement();
+    spawnPassableCar();
+    checkCollisions();
+    cleanEntities();
+    checkEnd();
 }

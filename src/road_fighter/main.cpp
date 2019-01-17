@@ -12,31 +12,32 @@ using namespace chrono;
 using namespace road_fighter_SFML;
 
 int main() {
-    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-    shared_ptr<sf::RenderWindow> window = make_shared<sf::RenderWindow>(sf::VideoMode(1280, 960, desktop.bitsPerPixel), "Road Fighter");
-//    sf::RenderWindow window(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "SFML works!", sf::Style::Fullscreen);
+    // Create SFML window
+    shared_ptr<sf::RenderWindow> window = make_shared<sf::RenderWindow>(sf::VideoMode(1280, 960), "Road Fighter");
 
+    // Set resolution for correct transformations
     road_fighter::Transformation::getInstance().setResolution(1280, 960);
+
+    // Pass window to game (for draw calls)
     GameSFML g(window);
 
+    // Timer for framerate lock
     steady_clock::time_point fpsTimer(steady_clock::now());
     duration<double, ratio<1, 60>> FPS{};
-//    microseconds loopTime{};
 
+    // Main game loop
     while (window->isOpen())
     {
+        // Lock framerate to 60FPS (one tick every 1/60th of a second)
         FPS = duration_cast<duration<int32_t, ratio<1, 60>>>(steady_clock::now() - fpsTimer);
         if (FPS.count() > 0) {
             fpsTimer = steady_clock::now();
             window->clear();
             g.drawEntities();
             window->display();
-            g.handleInput();
-            g.handleMovement();
-            g.spawnPassableCar();
-            g.checkCollisions();
-            g.cleanEntities();
-            g.checkEnd();
+            g.executeTick();
+
+            // Event for checking on application close (close with escape or close button)
             unique_ptr<sf::Event> event = make_unique<sf::Event>(sf::Event());
             while (window->pollEvent(*event))
             {
@@ -48,6 +49,8 @@ int main() {
                     }
                 }
             }
+            // Sleep for duration to reduce cpu load, although very rarely causes slight hitching
+            this_thread::sleep_until(fpsTimer + milliseconds(16));
         }
     }
     return 0;

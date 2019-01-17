@@ -13,12 +13,13 @@ void Score::update(const double& change) {
         score += change;
     }
     else {
-        score = 0;
+        score = 0;  // Prevent negative scores
     }
 }
 
 void Score::update(const string &event) {
     if (event == "GameEnd" && !endVisual) {
+        // Process to add new score to score list and determine if it's a high score
         readScores();
         auto it = std::lower_bound(scores.begin(), scores.end(), score, std::greater<>());
         scores.insert(it, static_cast<unsigned int>(round(score)));
@@ -34,6 +35,7 @@ void Score::update(const string &event) {
 }
 
 void Score::readScores() {
+    // Read from scores save file and parse to list
     ifstream input("../saves/scores.txt");
     if (!input) {
         return;
@@ -51,6 +53,7 @@ void Score::readScores() {
 }
 
 void Score::writeScores() {
+    // Write score list to save file
     ofstream output("../saves/scores.txt");
     for (const unsigned int& score : scores) {
         output << score << endl;

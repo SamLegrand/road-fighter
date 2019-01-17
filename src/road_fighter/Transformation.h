@@ -25,7 +25,6 @@ namespace road_fighter {
         void setResolution(const unsigned int& width, const unsigned int& height);
 
         // Conversion functions
-        void convertToWorldSpace(double& x, double& y);
         void coordinatesToRes(double &x, double &y);
         void dimensionsToRes(double &w, double &h);
 

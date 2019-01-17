@@ -7,16 +7,14 @@
 using namespace road_fighter_SFML;
 
 PlayerCarSFML::PlayerCarSFML() : PlayerCar(), texture(sf::Texture()), sprite(sf::Sprite()) {
+    // Load texture data
     if (!texture.loadFromFile("../graphics/PlayerCar.png")) {
         cerr << "Loading texture for PlayerCar failed." << endl;
     }
     sprite.setTexture(texture);
-    double w = width;
-    double h = height;
-    road_fighter::Transformation::getInstance().dimensionsToRes(w, h);
-    sf::Vector2f newSize(static_cast<float>(w), static_cast<float>(h));
-    sf::Vector2f oldSize = static_cast<sf::Vector2f>(sprite.getTexture()->getSize());
-    sprite.setScale(newSize.x/oldSize.x, newSize.y/oldSize.y);
+
+    // Scale sprite properly
+    ScaleSFML::getInstance().scaleSprite(sprite, width, height);
 }
 
 void PlayerCarSFML::draw() {

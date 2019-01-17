@@ -41,7 +41,7 @@ void World::draw() {
     }
 }
 
-void World::handleInputEntities() {
+void World::handleInput() {
     if (player->getMovementSpeed() <= 0 || yPos > -3) {
         player->handleInput();
     }
@@ -178,7 +178,7 @@ bool World::areColliding(const road_fighter::Entity &e1, const road_fighter::Ent
         || e1.getXPos() + e1.getWidth() < e2.getXPos() || e1.getXPos() > e2.getXPos() + e2.getWidth()));
 }
 
-bool World::addPassableCar(shared_ptr<road_fighter::Entity> entity) {
+void World::addPassableCar(shared_ptr<road_fighter::Entity> entity) {
     unsigned int counter = 0;
     for (const shared_ptr<Entity>& e : entities) {
         if (e->getType() == "Taxi" || e->getType() == "Truck") {
@@ -186,19 +186,34 @@ bool World::addPassableCar(shared_ptr<road_fighter::Entity> entity) {
                 ++counter;
             }
         }
-        if (areColliding(*entity, *e)) {
-            return false;
-        }
     }
     // Don't allow more than 5 passable cars at the same time on the screen
     if (counter >= 5) {
-        return true;
+        return;
+    }
+    // Try to move spawn location when colliding (up to 3 times)
+    bool colliding = true;
+    unsigned int tryCounter = 0;
+    while (colliding) {
+        colliding = false;
+        for (const shared_ptr<Entity>& e : entities) {
+            if (areColliding(*entity, *e) && tryCounter < 4) {
+                if (tryCounter < 4) {
+                    ++tryCounter;
+                    entity->updatePos(Random::getInstance().getRandom(leftBound, rightBound - entity->getWidth()), entity->getYPos());
+                    colliding = true;
+                    break;
+                }
+                else {
+                    return;
+                }
+            }
+        }
     }
     if (player->getMovementSpeed() > 0.01) {
-        return true;
+        return;
     }
     addEntity(entity);
-    return true;
 }
 
 void World::spawnBullet(shared_ptr<Entity> entity) {

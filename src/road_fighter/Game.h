@@ -16,16 +16,23 @@ namespace road_fighter {
         // Constructor
         explicit Game(const shared_ptr<EntityFactory>& factory);
 
-        // Functions to call in game loop, calls all actions in world
+        // ---Functions to call in game loop, calls all actions in world---
+        // Graphics
         void drawEntities();
+
+        // Input and movement
         virtual void handleInput() = 0;
         void handleInputWorld();
         void handleMovement();
+
+        // Entities
         void spawnPassableCar();
-        void checkCollisions();
         void spawnBullet();
         void cleanEntities();
+        void checkCollisions();
+
         void checkEnd();
+        void executeTick();
 
     private:
         shared_ptr<EntityFactory> factory;  // Factory for entity creation
