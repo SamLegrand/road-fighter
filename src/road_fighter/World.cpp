@@ -42,7 +42,13 @@ void World::draw() {
 }
 
 void World::handleInputEntities() {
-    player->handleInput();
+    if (player->getMovementSpeed() <= 0 || yPos > -3) {
+        player->handleInput();
+    }
+    // Don't allow movement below start of level
+    else {
+        player->moveUp();
+    }
     for (const shared_ptr<Entity>& e : entities) {
         e->handleInput();
     }
@@ -84,7 +90,7 @@ void World::setPlayer(unique_ptr<road_fighter::PlayerCar> entity) {
 void World::checkCollisions() {
     set<size_t, greater<>> toErase;
     for (size_t i = 0; i < entities.size(); ++i) {
-        if (entities[i]->getType() == "Bullet") {
+        if (entities[i]->getType() == "Bullet" && !gameEnd) {
             for (size_t j = 0; j < entities.size(); ++j) {
                 if (entities[i] != entities[j] && areColliding(*entities[i], *entities[j])) {
 //                    cout << entities[i]->getType() << " colliding with " << entities[j]->getType() << endl;
@@ -142,7 +148,7 @@ void World::checkCollisions() {
             if (areColliding(*player, *e)) {
 //                cout << "Player colliding with " << e->getType() << endl;
                 if (e->getType() == "Truck") {
-                    notifyObservers(-100);
+                    notifyObservers(-200);
                     player->setMotorDisabled(60);
                     if (player->getYPos() < e->getYPos()) {
                         player->setSpeed(-0.06);
