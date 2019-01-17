@@ -51,10 +51,6 @@ void WorldSFML::drawSelf() {
     // Draw finish line (no draw calls when not on screen)
     if (yPos + height >= getLength()) {
         HelperSFML::getInstance().setSpritePosition(finishSprite, leftBound, yPos - getLength());
-//        double l = leftBound;
-//        double finishY = yPos - getLength();
-//        road_fighter::Transformation::getInstance().coordinatesToRes(l, finishY);
-//        finishSprite.setPosition(static_cast<float>(l), static_cast<float>(finishY));
         window->draw(finishSprite);
     }
 }
