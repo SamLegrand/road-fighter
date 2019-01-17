@@ -56,8 +56,8 @@ namespace road_fighter {
         void setLength(const double& length);
         double getLength() const;
 
-        // Setter for when game ends (no collision control for player when game ends)
-        void setGameEnd(bool gameEnd);
+        // Getter for when game ends (no collision control for player when game ends)
+        bool isGameEnd() const;
 
 
     private:

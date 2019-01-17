@@ -58,6 +58,7 @@ void World::handleMovement() {
         scrollWorld(movementSpeed);
     }
     if (yPos - player->getHeight() > length) {
+        gameEnd = true;
         notifyObservers("GameEnd");
     }
     if (yPos < -3) {
@@ -250,6 +251,6 @@ void World::notifyObservers(const string &event) {
     }
 }
 
-void World::setGameEnd(bool gameEnd) {
-    World::gameEnd = gameEnd;
+bool World::isGameEnd() const {
+    return gameEnd;
 }
