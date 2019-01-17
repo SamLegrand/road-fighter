@@ -50,7 +50,7 @@ int main() {
                 }
             }
             // Sleep for duration to reduce cpu load, although very rarely causes slight hitching
-            this_thread::sleep_until(fpsTimer + milliseconds(16));
+            this_thread::sleep_until(fpsTimer + milliseconds(15));
         }
     }
     return 0;
