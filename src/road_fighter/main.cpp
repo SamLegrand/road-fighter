@@ -26,7 +26,7 @@ int main() {
     while (window->isOpen())
     {
         FPS = duration_cast<duration<int32_t, ratio<1, 60>>>(steady_clock::now() - fpsTimer);
-        if (FPS.count() >= 1) {
+        if (FPS.count() > 0) {
             fpsTimer = steady_clock::now();
             window->clear();
             g.drawEntities();

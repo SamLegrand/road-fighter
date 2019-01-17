@@ -23,7 +23,7 @@ void World::removeObserver(const shared_ptr<Score>& observer) {
 }
 
 void World::addEntity(shared_ptr<road_fighter::Entity> entity) {
-    entities.emplace_back(move(entity));
+    entities.emplace_back(entity);
 }
 
 void World::removeEntity(const shared_ptr<road_fighter::Entity> &entity) {
@@ -82,13 +82,12 @@ void World::setPlayer(unique_ptr<road_fighter::PlayerCar> entity) {
 }
 
 void World::checkCollisions() {
-//    vector<shared_ptr<road_fighter::Entity>> myEntities = entities;
     set<size_t, greater<>> toErase;
     for (size_t i = 0; i < entities.size(); ++i) {
         if (entities[i]->getType() == "Bullet") {
             for (size_t j = 0; j < entities.size(); ++j) {
                 if (entities[i] != entities[j] && areColliding(*entities[i], *entities[j])) {
-                    cout << entities[i]->getType() << " colliding with " << entities[j]->getType() << endl;
+//                    cout << entities[i]->getType() << " colliding with " << entities[j]->getType() << endl;
                     if (entities[j]->getType() == "RacingCar") {
                         shared_ptr<RacingCar> r = dynamic_pointer_cast<RacingCar>(entities[j]);
                         r->setSpeed(0);
@@ -113,7 +112,7 @@ void World::checkCollisions() {
             }
             for (const shared_ptr<Entity>& e : entities) {
                 if (entities[i] != e && areColliding(*entities[i], *e)) {
-                    cout << entities[i]->getType() << " colliding with " << e->getType() << endl;
+//                    cout << entities[i]->getType() << " colliding with " << e->getType() << endl;
                     if (e->getType() == "Truck") {
                         r->setMotorDisabled(60);
                         if (r->getYPos() < e->getYPos()) {
@@ -141,7 +140,7 @@ void World::checkCollisions() {
     if (!gameEnd) {
         for (const shared_ptr<Entity>& e : entities) {
             if (areColliding(*player, *e)) {
-                cout << "Player colliding with " << e->getType() << endl;
+//                cout << "Player colliding with " << e->getType() << endl;
                 if (e->getType() == "Truck") {
                     notifyObservers(-100);
                     player->setMotorDisabled(60);
@@ -174,15 +173,25 @@ bool World::areColliding(const road_fighter::Entity &e1, const road_fighter::Ent
 }
 
 bool World::addPassableCar(shared_ptr<road_fighter::Entity> entity) {
+    unsigned int counter = 0;
     for (const shared_ptr<Entity>& e : entities) {
+        if (e->getType() == "Taxi" || e->getType() == "Truck") {
+            if (e->getYPos() > player->getYPos() - 6 && e->getYPos() < player->getYPos() + 3) {
+                ++counter;
+            }
+        }
         if (areColliding(*entity, *e)) {
             return false;
         }
     }
+    // Don't allow more than 5 passable cars at the same time on the screen
+    if (counter >= 5) {
+        return true;
+    }
     if (player->getMovementSpeed() > 0.01) {
         return true;
     }
-    addEntity(move(entity));
+    addEntity(entity);
     return true;
 }
 
@@ -194,7 +203,7 @@ void World::spawnBullet(shared_ptr<Entity> entity) {
                 return;
             }
         }
-        addEntity(move(entity));
+        addEntity(entity);
         player->setBlockShoot(true);
     }
 }
@@ -272,7 +281,5 @@ double World::getPositionScore() {
         case 1: return 1000;
         case 2: return 600;
         case 3: return 300;
-        case 4: return 200;
-        case 5: return 100;
     }
 }

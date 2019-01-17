@@ -6,7 +6,7 @@
 
 using namespace road_fighter;
 
-Score::Score() : score(0), endVisual(false), highScore(false), scores({}) {}
+Score::Score() : score(0), scores({}), endVisual(false), highScore(false) {}
 
 void Score::update(const double& change) {
     if (score + change > 0) {
