@@ -117,7 +117,7 @@ void World::checkCollisions() {
                     if (e->getType() == "Truck") {
                         r->setMotorDisabled(60);
                         if (r->getYPos() < e->getYPos()) {
-                            r->setSpeed(-0.04);
+                            r->setSpeed(-0.06);
                         }
                         else {
                             r->setSpeed(0.02);
@@ -125,7 +125,7 @@ void World::checkCollisions() {
                     }
                     if (e->getType() == "Taxi" || e->getType() == "RacingCar") {
                         if (r->getYPos() < e->getYPos()) {
-                            r->setSpeed(-0.02);
+                            r->setSpeed(-0.04);
                         }
                         else {
                             r->setSpeed(0.01);
@@ -146,7 +146,7 @@ void World::checkCollisions() {
                     notifyObservers(-100);
                     player->setMotorDisabled(60);
                     if (player->getYPos() < e->getYPos()) {
-                        player->setSpeed(-0.04);
+                        player->setSpeed(-0.06);
                     }
                     else {
                         player->setSpeed(0.02);
@@ -155,7 +155,7 @@ void World::checkCollisions() {
                 if (e->getType() == "Taxi" || e->getType() == "RacingCar") {
                     notifyObservers(-100);
                     if (player->getYPos() < e->getYPos()) {
-                        player->setSpeed(-0.02);
+                        player->setSpeed(-0.04);
                     }
                     else {
                         player->setSpeed(0.01);
@@ -261,7 +261,7 @@ bool World::isGameEnd() const {
 double World::getPositionScore() {
     unsigned int position = 1;
     for (const shared_ptr<Entity>& entity : entities) {
-        if (entity->getType() == "PassableCar") {
+        if (entity->getType() == "RacingCar") {
             if (entity->getYPos() < player->getYPos()) {
                 ++position;
             }
