@@ -5,23 +5,24 @@
 #ifndef ROAD_FIGHTER_WORLD_H
 #define ROAD_FIGHTER_WORLD_H
 
-#include "Entity.h"
-#include "Score.h"
-#include "PlayerCar.h"
-#include "Random.h"
 #include "Bullet.h"
-#include "RacingCar.h"
+#include "Entity.h"
 #include "PassableCar.h"
-#include <vector>
-#include <memory>
+#include "PlayerCar.h"
+#include "RacingCar.h"
+#include "Random.h"
+#include "Score.h"
 #include <algorithm>
+#include <memory>
 #include <set>
+#include <vector>
 
 using namespace std;
 
 namespace road_fighter {
-    class World : public Entity {
-    public:
+class World : public Entity
+{
+public:
         // Constructor
         World();
 
@@ -60,15 +61,13 @@ namespace road_fighter {
         bool isGameEnd() const;
         double getPositionScore() const;
 
+private:
+        vector<shared_ptr<Score>> observers; // List of observers
+        vector<shared_ptr<Entity>> entities; // List of other entities
+        unique_ptr<PlayerCar> player;        // Points to the player
+        double length;                       // Level length
+        bool gameEnd;                        // Set if game ends
+};
+} // namespace road_fighter
 
-    private:
-        vector<shared_ptr<Score>> observers;    // List of observers
-        vector<shared_ptr<Entity>> entities;    // List of other entities
-        unique_ptr<PlayerCar> player;           // Points to the player
-        double length;                          // Level length
-        bool gameEnd;                           // Set if game ends
-    };
-}
-
-
-#endif //ROAD_FIGHTER_WORLD_H
+#endif // ROAD_FIGHTER_WORLD_H

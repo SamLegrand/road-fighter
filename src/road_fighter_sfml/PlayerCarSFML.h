@@ -6,18 +6,19 @@
 #define ROAD_FIGHTER_PLAYERCARSFML_H
 
 #include "../road_fighter/PlayerCar.h"
+#include "HelperSFML.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <iostream>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics.hpp>
 #include <memory>
-#include "HelperSFML.h"
 
 using namespace std;
 
 namespace road_fighter_SFML {
-    class PlayerCarSFML : public road_fighter::PlayerCar {
-    public:
+class PlayerCarSFML : public road_fighter::PlayerCar
+{
+public:
         // Constructors
         PlayerCarSFML();
         explicit PlayerCarSFML(const shared_ptr<sf::RenderWindow>& w);
@@ -26,14 +27,13 @@ namespace road_fighter_SFML {
         void draw() override;
         void handleInput() override;
 
-    private:
-        sf::Texture texture;    // Texture
-        sf::Sprite sprite;      // Sprite to render
-        shared_ptr<sf::RenderWindow> window;    // Window to render to
+private:
+        sf::Texture texture;                 // Texture
+        sf::Sprite sprite;                   // Sprite to render
+        shared_ptr<sf::RenderWindow> window; // Window to render to
         sf::Font font;
         sf::Text text;
-    };
-}
+};
+} // namespace road_fighter_SFML
 
-
-#endif //ROAD_FIGHTER_PLAYERCARSFML_H
+#endif // ROAD_FIGHTER_PLAYERCARSFML_H

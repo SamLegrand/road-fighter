@@ -8,17 +8,18 @@
 #include "Entity.h"
 
 namespace road_fighter {
-    class Bullet : public Entity {
-    public:
+class Bullet : public Entity
+{
+public:
         // Constructor
         Bullet(const double& width, const double& height);
 
         // Function for handling bullet movement
         void handleMovement() override;
-    private:
+
+private:
         double speed; // Constant speed of the bullet
-    };
-}
+};
+} // namespace road_fighter
 
-
-#endif //ROAD_FIGHTER_BULLET_H
+#endif // ROAD_FIGHTER_BULLET_H

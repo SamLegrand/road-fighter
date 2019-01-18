@@ -8,8 +8,9 @@
 #include "Entity.h"
 
 namespace road_fighter {
-    class PlayerCar : public Entity {
-    public:
+class PlayerCar : public Entity
+{
+public:
         PlayerCar();
 
         // Movement functions
@@ -35,19 +36,18 @@ namespace road_fighter {
         void addBullets();
         void useBullet();
 
-    private:
-        double speedX;  // Horizontal speed
-        double speedY;  // Vertical speed
-        double prevSpeedX;  // Keeps previous speed for handling slowdown
-        double prevSpeedY;  // Keeps previous speed for handling slowdown
-        bool notMovingX;    // Boolean for handling slowdown
-        bool notMovingY;    // Boolean for handling slowdown
-        bool blockShoot;    // Blocks shooting (only able to shoot once per press)
+private:
+        double speedX;                  // Horizontal speed
+        double speedY;                  // Vertical speed
+        double prevSpeedX;              // Keeps previous speed for handling slowdown
+        double prevSpeedY;              // Keeps previous speed for handling slowdown
+        bool notMovingX;                // Boolean for handling slowdown
+        bool notMovingY;                // Boolean for handling slowdown
+        bool blockShoot;                // Blocks shooting (only able to shoot once per press)
         unsigned int motorDisabledTime; // Time that acceleration should not be allowed
-        unsigned int bulletCount;   // Amount of bullets in inventory
+        unsigned int bulletCount;       // Amount of bullets in inventory
         unsigned int bulletCapacity;    // Maximum bullet capacity
-    };
-}
+};
+} // namespace road_fighter
 
-
-#endif //ROAD_FIGHTER_PLAYERCAR_H
+#endif // ROAD_FIGHTER_PLAYERCAR_H

@@ -5,25 +5,26 @@
 #ifndef ROAD_FIGHTER_ENTITYFACTORY_H
 #define ROAD_FIGHTER_ENTITYFACTORY_H
 
-#include <memory>
+#include "Ammo.h"
 #include "Bullet.h"
 #include "PassableCar.h"
 #include "PlayerCar.h"
 #include "RacingCar.h"
 #include "World.h"
-#include "Ammo.h"
+#include <memory>
 
 namespace road_fighter {
-    // Abstract base class for entity factory
-    class EntityFactory {
-    public:
+// Abstract base class for entity factory
+class EntityFactory
+{
+public:
         virtual shared_ptr<Bullet> createBullet() = 0;
         virtual shared_ptr<PassableCar> createPassableCar() = 0;
         virtual unique_ptr<PlayerCar> createPlayerCar() = 0;
         virtual shared_ptr<RacingCar> createRacingCar() = 0;
         virtual unique_ptr<World> createWorld() = 0;
         virtual shared_ptr<Ammo> createAmmo() = 0;
-    };
-}
+};
+} // namespace road_fighter
 
-#endif //ROAD_FIGHTER_ENTITYFACTORY_H
+#endif // ROAD_FIGHTER_ENTITYFACTORY_H

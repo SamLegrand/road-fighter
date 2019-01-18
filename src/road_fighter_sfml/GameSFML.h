@@ -10,14 +10,15 @@
 #include "SFML/Graphics.hpp"
 
 namespace road_fighter_SFML {
-    class GameSFML : public road_fighter::Game {
-    public:
+class GameSFML : public road_fighter::Game
+{
+public:
         // Constructor
         explicit GameSFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Input function
         void handleInput() override;
-    };
-}
+};
+} // namespace road_fighter_SFML
 
-#endif //ROAD_FIGHTER_GAMESFML_H
+#endif // ROAD_FIGHTER_GAMESFML_H

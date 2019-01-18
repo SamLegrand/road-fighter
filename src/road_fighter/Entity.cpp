@@ -8,37 +8,27 @@ using namespace road_fighter;
 
 Entity::Entity() : xPos(0), yPos(0), leftBound(-1.75), rightBound(1.75), type("Entity") {}
 
-Entity::Entity(const double& w, const double& h) : xPos(0), yPos(0), width(w), height(h), leftBound(-1.75), rightBound(1.75), type("Entity") {}
-
-void Entity::updatePos(const double &x, const double &y) {
-    xPos = x;
-    yPos = y;
+Entity::Entity(const double& w, const double& h)
+    : xPos(0), yPos(0), width(w), height(h), leftBound(-1.75), rightBound(1.75), type("Entity")
+{
 }
 
-double Entity::getXPos() const {
-    return xPos;
+void Entity::updatePos(const double& x, const double& y)
+{
+        xPos = x;
+        yPos = y;
 }
 
-double Entity::getYPos() const {
-    return yPos;
-}
+double Entity::getXPos() const { return xPos; }
 
-void Entity::scroll(const double& speed) {
-    yPos -= speed;
-}
+double Entity::getYPos() const { return yPos; }
 
-double Entity::getWidth() const {
-    return width;
-}
+void Entity::scroll(const double& speed) { yPos -= speed; }
 
-double Entity::getHeight() const {
-    return height;
-}
+double Entity::getWidth() const { return width; }
 
-const string &Entity::getType() const {
-    return type;
-}
+double Entity::getHeight() const { return height; }
 
-void Entity::setHeight(const double &h) {
-    height = h;
-}
+const string& Entity::getType() const { return type; }
+
+void Entity::setHeight(const double& h) { height = h; }

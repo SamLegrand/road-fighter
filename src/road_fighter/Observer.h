@@ -9,13 +9,13 @@
 using namespace std;
 
 namespace road_fighter {
-    // Abstract base class for observers
-    class Observer {
-    public:
+// Abstract base class for observers
+class Observer
+{
+public:
         virtual void update(const double& change) = 0;
         virtual void update(const string& event) = 0;
-    };
-}
+};
+} // namespace road_fighter
 
-
-#endif //ROAD_FIGHTER_OBSERVER_H
+#endif // ROAD_FIGHTER_OBSERVER_H

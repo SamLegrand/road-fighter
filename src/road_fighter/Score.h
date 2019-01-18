@@ -6,15 +6,16 @@
 #define ROAD_FIGHTER_SCORE_H
 
 #include "Observer.h"
-#include <fstream>
-#include <vector>
-#include <cmath>
 #include <algorithm>
+#include <cmath>
+#include <fstream>
 #include <sstream>
+#include <vector>
 
 namespace road_fighter {
-    class Score : public Observer {
-    public:
+class Score : public Observer
+{
+public:
         // Constructor
         Score();
 
@@ -29,13 +30,12 @@ namespace road_fighter {
         // Display (for draw call)
         virtual void display() = 0;
 
-    protected:
-        double score;   // The current score to display
+protected:
+        double score;                // The current score to display
         vector<unsigned int> scores; // List of current scores save file
-        bool endVisual; // Signals game has ended to graphical library
-        bool highScore; // Signals to graphical library that current score is a high score
-    };
-}
+        bool endVisual;              // Signals game has ended to graphical library
+        bool highScore;              // Signals to graphical library that current score is a high score
+};
+} // namespace road_fighter
 
-
-#endif //ROAD_FIGHTER_SCORE_H
+#endif // ROAD_FIGHTER_SCORE_H

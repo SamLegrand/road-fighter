@@ -5,37 +5,38 @@
 #ifndef ROAD_FIGHTER_TRANSFORMATION_H
 #define ROAD_FIGHTER_TRANSFORMATION_H
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
 namespace road_fighter {
-    class Transformation {
-    public:
-    public:
+class Transformation
+{
+public:
+public:
         // Returns the singleton instance
         static Transformation& getInstance();
 
         // Deleting copy constructor and assignment operator (no copies are allowed!)
         Transformation(Transformation const&) = delete;
-        void operator=(Transformation const&)  = delete;
+        void operator=(Transformation const&) = delete;
 
         // Set the resolution for proper coordinate calculation
         void setResolution(const unsigned int& width, const unsigned int& height);
 
         // Conversion functions
-        void coordinatesToRes(double &x, double &y);
-        void dimensionsToRes(double &w, double &h);
+        void coordinatesToRes(double& x, double& y);
+        void dimensionsToRes(double& w, double& h);
 
-    private:
+private:
         // Private constructor (constructs only once)
-        Transformation() : width(0), height(0) {};
+        Transformation() : width(0), height(0){};
 
         // Resolution parameters
         unsigned int width;
         unsigned int height;
-    };
-}
+};
+} // namespace road_fighter
 
-#endif //ROAD_FIGHTER_TRANSFORMATION_H
+#endif // ROAD_FIGHTER_TRANSFORMATION_H

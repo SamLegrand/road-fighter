@@ -5,12 +5,13 @@
 #ifndef ROAD_FIGHTER_ENTITY_H
 #define ROAD_FIGHTER_ENTITY_H
 
-#include "Transformation.h"
 #include "Random.h"
+#include "Transformation.h"
 
 namespace road_fighter {
-    class Entity {
-    public:
+class Entity
+{
+public:
         // Constructors
         Entity();
         Entity(const double& width, const double& height);
@@ -30,18 +31,18 @@ namespace road_fighter {
         double getYPos() const;
         double getWidth() const;
         double getHeight() const;
-        const string &getType() const;
+        const string& getType() const;
         void setHeight(const double& h);
 
-    protected:
-        double xPos;    // Current horizontal position
-        double yPos;    // Current vertical position
-        double width;   // Entity width
-        double height;  // Entity height
-        double leftBound;   // Left bound (limitation for road)
-        double rightBound;  // Right bound (limitation for road)
-        string type;    // Type of entity (needed for proper action on collision)
-    };
-}
+protected:
+        double xPos;       // Current horizontal position
+        double yPos;       // Current vertical position
+        double width;      // Entity width
+        double height;     // Entity height
+        double leftBound;  // Left bound (limitation for road)
+        double rightBound; // Right bound (limitation for road)
+        string type;       // Type of entity (needed for proper action on collision)
+};
+} // namespace road_fighter
 
-#endif //ROAD_FIGHTER_ENTITY_H
+#endif // ROAD_FIGHTER_ENTITY_H

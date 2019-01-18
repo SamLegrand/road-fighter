@@ -6,8 +6,9 @@
 
 using namespace road_fighter;
 
-Ammo::Ammo(const double &width, const double &height) : Entity(width, height) {
-    xPos = Random::getInstance().getRandom(leftBound, rightBound - width);  // Set random spawn position
-    type = "Ammo";
-    yPos = -3 - height;
+Ammo::Ammo(const double& width, const double& height) : Entity(width, height)
+{
+        xPos = Random::getInstance().getRandom(leftBound, rightBound - width); // Set random spawn position
+        type = "Ammo";
+        yPos = -3 - height;
 }

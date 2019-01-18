@@ -8,11 +8,12 @@
 #include "Entity.h"
 
 namespace road_fighter {
-    class Ammo : public Entity {
-    public:
+class Ammo : public Entity
+{
+public:
         Ammo(const double& width, const double& height);
-        void handleMovement() override {};
-    };
-}
+        void handleMovement() override{};
+};
+} // namespace road_fighter
 
-#endif //ROAD_FIGHTER_AMMO_H
+#endif // ROAD_FIGHTER_AMMO_H

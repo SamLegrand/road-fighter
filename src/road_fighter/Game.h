@@ -5,14 +5,15 @@
 #ifndef ROAD_FIGHTER_GAME_H
 #define ROAD_FIGHTER_GAME_H
 
-#include "World.h"
-#include "PlayerCar.h"
 #include "EntityFactory.h"
+#include "PlayerCar.h"
 #include "Random.h"
+#include "World.h"
 
 namespace road_fighter {
-    class Game {
-    public:
+class Game
+{
+public:
         // Constructor
         explicit Game(const shared_ptr<EntityFactory>& factory);
 
@@ -35,11 +36,11 @@ namespace road_fighter {
         void checkEnd();
         void executeTick();
 
-    private:
-        shared_ptr<EntityFactory> factory;  // Factory for entity creation
-        unique_ptr<World> world;    // Game world
+private:
+        shared_ptr<EntityFactory> factory; // Factory for entity creation
+        unique_ptr<World> world;           // Game world
         bool gameEnd;
-    };
-}
+};
+} // namespace road_fighter
 
-#endif //ROAD_FIGHTER_GAME_H
+#endif // ROAD_FIGHTER_GAME_H
