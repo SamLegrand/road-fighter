@@ -30,5 +30,3 @@ double Entity::getWidth() const { return width; }
 double Entity::getHeight() const { return height; }
 
 const string& Entity::getType() const { return type; }
-
-void Entity::setHeight(const double& h) { height = h; }

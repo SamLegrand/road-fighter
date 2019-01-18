@@ -18,7 +18,7 @@ int main()
         road_fighter::Transformation::getInstance().setResolution(1280, 960);
 
         // Pass window to game (for draw calls)
-        GameSFML g(window);
+        shared_ptr<GameSFML> g = make_shared<GameSFML>(window);
 
         // Frame duration for framerate lock
         using frames = duration<int64_t, ratio<1, 60>>;
@@ -40,9 +40,9 @@ int main()
 
                 // Lock framerate to 60FPS (one tick every 1/60th of a second)
                 if (steady_clock::now() >= nextFrame) {
-                        g.executeTick();
+                        g->executeTick();
                         window->clear();
-                        g.drawEntities();
+                        g->drawEntities();
                         window->display();
 
                         nextFrame += frames{1};
