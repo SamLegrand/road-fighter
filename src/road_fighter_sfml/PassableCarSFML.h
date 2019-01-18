@@ -14,7 +14,7 @@ namespace road_fighter_SFML {
     public:
         // Constructors
         PassableCarSFML();
-        PassableCarSFML(const shared_ptr<sf::RenderWindow>& w);
+        explicit PassableCarSFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Display and input functions
         void draw() override;

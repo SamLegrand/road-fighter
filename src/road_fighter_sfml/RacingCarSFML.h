@@ -14,7 +14,7 @@ namespace road_fighter_SFML {
     public:
         // Constructors
         RacingCarSFML();
-        RacingCarSFML(const shared_ptr<sf::RenderWindow>& w);
+        explicit RacingCarSFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Display and input functions
         void draw() override;

@@ -14,7 +14,7 @@ namespace road_fighter_SFML {
     public:
         // Constructors
         AmmoSFML();
-        AmmoSFML(const shared_ptr<sf::RenderWindow>& w);
+        explicit AmmoSFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Display and input functions
         void draw() override;

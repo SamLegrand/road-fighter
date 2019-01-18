@@ -16,7 +16,7 @@ namespace road_fighter_SFML {
     public:
         // Constructors
         WorldSFML();
-        WorldSFML(const shared_ptr<sf::RenderWindow>& w);
+        explicit WorldSFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Display and input functions
         void drawSelf() override;

@@ -18,7 +18,7 @@ namespace road_fighter_SFML {
     class ScoreSFML : public road_fighter::Score {
     public:
         // Constructor
-        ScoreSFML(const shared_ptr<sf::RenderWindow>& w);
+        explicit ScoreSFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Display function
         void display() override;

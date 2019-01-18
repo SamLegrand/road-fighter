@@ -20,7 +20,7 @@ namespace road_fighter_SFML {
     public:
         // Constructors
         PlayerCarSFML();
-        PlayerCarSFML(const shared_ptr<sf::RenderWindow>& w);
+        explicit PlayerCarSFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Display and input functions
         void draw() override;

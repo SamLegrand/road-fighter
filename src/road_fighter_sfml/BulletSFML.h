@@ -14,7 +14,7 @@ namespace road_fighter_SFML {
     public:
         // Constructors
         BulletSFML();
-        BulletSFML(const shared_ptr<sf::RenderWindow>& w);
+        explicit BulletSFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Display and input functions
         void draw() override;

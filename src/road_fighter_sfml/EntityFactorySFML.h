@@ -18,7 +18,7 @@ namespace road_fighter_SFML {
     class EntityFactorySFML : public road_fighter::EntityFactory {
     public:
         // Constructor
-        EntityFactorySFML(const shared_ptr<sf::RenderWindow>& w);
+        explicit EntityFactorySFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Creator functions returning base class pointers
         shared_ptr<road_fighter::Bullet> createBullet() override;
