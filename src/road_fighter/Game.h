@@ -28,6 +28,7 @@ namespace road_fighter {
         // Entities
         void spawnPassableCar();
         void spawnBullet();
+        void spawnAmmo();
         void cleanEntities();
         void checkCollisions();
 

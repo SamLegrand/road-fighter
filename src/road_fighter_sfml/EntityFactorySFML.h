@@ -12,6 +12,7 @@
 #include "PassableCarSFML.h"
 #include "RacingCarSFML.h"
 #include "WorldSFML.h"
+#include "AmmoSFML.h"
 
 namespace road_fighter_SFML {
     class EntityFactorySFML : public road_fighter::EntityFactory {
@@ -25,6 +26,7 @@ namespace road_fighter_SFML {
         shared_ptr<road_fighter::PassableCar> createPassableCar() override;
         shared_ptr<road_fighter::RacingCar> createRacingCar() override;
         unique_ptr<road_fighter::World> createWorld() override;
+        shared_ptr<road_fighter::Ammo> createAmmo() override;
 
     private:
         shared_ptr<sf::RenderWindow> window;    // Window to render to (for creating the objects)

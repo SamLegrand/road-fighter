@@ -29,6 +29,14 @@ namespace road_fighter {
         void setSpeed(const double& s);
         void setMotorDisabled(const unsigned int& time);
 
+
+        bool hasBullets() const;
+        void addBullets();
+        void useBullet();
+        unsigned int getBulletCapacity() const;
+        unsigned int getBulletCount() const;
+        bool hasMaxAmmo() const;
+
     private:
         double speedX;  // Horizontal speed
         double speedY;  // Vertical speed
@@ -38,6 +46,8 @@ namespace road_fighter {
         bool notMovingY;    // Boolean for handling slowdown
         bool blockShoot;    // Blocks shooting (only able to shoot once per press)
         unsigned int motorDisabledTime; // Time that acceleration should not be allowed
+        unsigned int bulletCount;   // Amount of bullets in inventory
+        unsigned int bulletCapacity;    // Maximum bullet capacity
     };
 }
 

@@ -11,6 +11,8 @@ PlayerCar::PlayerCar() : Entity(0.4, 0.8) {
     speedY = 0;
     blockShoot = false;
     motorDisabledTime = 0;
+    bulletCount = 5;
+    bulletCapacity = 20;
 }
 
 void PlayerCar::handleMovement() {
@@ -20,7 +22,7 @@ void PlayerCar::handleMovement() {
         updatePos(x + speedX, y);
     }
     else {
-        speedX = -speedX/2;
+        speedX /= -2;
     }
     if (prevSpeedX == speedX) {
         notMovingX = true;
@@ -81,7 +83,7 @@ void PlayerCar::setBlockShoot(const bool &b) {
 }
 
 bool PlayerCar::canShoot() const {
-    return !blockShoot;
+    return !blockShoot && hasBullets();
 }
 
 void PlayerCar::setSpeed(const double &s) {
@@ -91,4 +93,33 @@ void PlayerCar::setSpeed(const double &s) {
 
 void PlayerCar::setMotorDisabled(const unsigned int &time) {
     motorDisabledTime = time;
+}
+
+bool PlayerCar::hasBullets() const {
+    return bulletCount > 0;
+}
+
+void PlayerCar::useBullet() {
+    bulletCount--;
+}
+
+void PlayerCar::addBullets() {
+    if (bulletCount < bulletCapacity) {
+        bulletCount += 5;
+        if (bulletCount > bulletCapacity) {
+            bulletCount = bulletCapacity;
+        }
+    }
+}
+
+unsigned int PlayerCar::getBulletCapacity() const {
+    return bulletCapacity;
+}
+
+unsigned int PlayerCar::getBulletCount() const {
+    return bulletCount;
+}
+
+bool PlayerCar::hasMaxAmmo() const {
+    return bulletCapacity == bulletCount;
 }

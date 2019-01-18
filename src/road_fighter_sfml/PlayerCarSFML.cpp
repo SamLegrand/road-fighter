@@ -13,6 +13,19 @@ PlayerCarSFML::PlayerCarSFML() : PlayerCar(), texture(sf::Texture()), sprite(sf:
     }
     sprite.setTexture(texture);
 
+    // Load and set all font data for score display
+    if (!font.loadFromFile("../graphics/Font.ttf"))
+    {
+        cerr << "Couldn't load font data." << endl;
+    }
+    text.setFont(font);
+    text.setCharacterSize(32);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(15, 30);
+    text.setOutlineColor(sf::Color::Black);
+    text.setOutlineThickness(1);
+
     // Scale sprite properly
     HelperSFML::getInstance().scaleSprite(sprite, width, height);
 }
@@ -20,6 +33,13 @@ PlayerCarSFML::PlayerCarSFML() : PlayerCar(), texture(sf::Texture()), sprite(sf:
 void PlayerCarSFML::draw() {
     HelperSFML::getInstance().setSpritePosition(sprite, xPos, yPos);
     window->draw(sprite);
+    if (getBulletCount() == getBulletCapacity()) {
+        text.setString("Bullets: max");
+    }
+    else {
+        text.setString("Bullets: " + to_string(getBulletCount()));
+    }
+    window->draw(text);
 }
 
 PlayerCarSFML::PlayerCarSFML(const shared_ptr<sf::RenderWindow>& w) : PlayerCarSFML() {

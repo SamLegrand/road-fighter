@@ -90,6 +90,14 @@ void World::setPlayer(unique_ptr<road_fighter::PlayerCar> entity) {
 void World::checkCollisions() {
     set<size_t, greater<>> toErase;
     for (size_t i = 0; i < entities.size(); ++i) {
+        if (entities[i]->getType() == "Ammo" && !gameEnd) {
+            if (areColliding(*player, *entities[i])) {
+                if (!player->hasMaxAmmo()) {
+                    player->addBullets();
+                    toErase.insert(i);
+                }
+            }
+        }
         if (entities[i]->getType() == "Bullet" && !gameEnd) {
             for (size_t j = 0; j < entities.size(); ++j) {
                 if (entities[i] != entities[j] && areColliding(*entities[i], *entities[j])) {
@@ -97,6 +105,9 @@ void World::checkCollisions() {
                     if (entities[j]->getType() == "RacingCar") {
                         shared_ptr<RacingCar> r = dynamic_pointer_cast<RacingCar>(entities[j]);
                         r->setSpeed(0);
+                    }
+                    if (entities[j]->getType() == "Ammo") {
+                        continue;
                     }
                     else {
                         toErase.insert(j);
@@ -226,6 +237,7 @@ void World::spawnBullet(shared_ptr<Entity> entity) {
         }
         addEntity(entity);
         player->setBlockShoot(true);
+        player->useBullet();
     }
 }
 

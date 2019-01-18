@@ -27,3 +27,7 @@ shared_ptr<road_fighter::RacingCar> EntityFactorySFML::createRacingCar() {
 unique_ptr<road_fighter::World> EntityFactorySFML::createWorld() {
     return make_unique<WorldSFML>(window);
 }
+
+shared_ptr<road_fighter::Ammo> EntityFactorySFML::createAmmo() {
+    return make_shared<AmmoSFML>(window);
+}

@@ -30,6 +30,8 @@ namespace road_fighter_SFML {
         sf::Texture texture;    // Texture
         sf::Sprite sprite;      // Sprite to render
         shared_ptr<sf::RenderWindow> window;    // Window to render to
+        sf::Font font;
+        sf::Text text;
     };
 }
 
