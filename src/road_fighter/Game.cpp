@@ -59,7 +59,7 @@ void Game::spawnAmmo() {
     // Spawn passable car (randomly, 1 per 300 ticks on average)
     double rnd = Random::getInstance().getRandom(0, 1); // Get random between 0 and 1
     if (rnd < 1/300.0) {
-        world->addEntity(factory->createAmmo());
+        world->addEntityFront(factory->createAmmo());   // Add to front (draw under other objects)
     }
 }
 

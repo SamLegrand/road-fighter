@@ -95,7 +95,7 @@ bool PlayerCar::hasBullets() const {
 }
 
 void PlayerCar::useBullet() {
-    bulletCount--;
+    --bulletCount;
 }
 
 void PlayerCar::addBullets() {

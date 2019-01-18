@@ -11,6 +11,7 @@
 #include "Random.h"
 #include "Bullet.h"
 #include "RacingCar.h"
+#include "PassableCar.h"
 #include <vector>
 #include <memory>
 #include <algorithm>
@@ -26,15 +27,14 @@ namespace road_fighter {
 
         // Observer functions
         void addObserver(const shared_ptr<Score>& observer);
-        void removeObserver(const shared_ptr<Score>& observer);
         void notifyObservers(const double& scoreChange);
         void notifyObservers(const string& event);
 
         // Functions for adding certain types of entities
-        void addEntity(shared_ptr<Entity> entity);
-        void removeEntity(const shared_ptr<Entity>& entity);
+        void addEntity(const shared_ptr<Entity>& entity);
+        void addEntityFront(const shared_ptr<Entity>& entity);
         void setPlayer(unique_ptr<PlayerCar> entity);
-        void addPassableCar(shared_ptr<Entity> entity);
+        void addPassableCar(const shared_ptr<PassableCar>& entity);
         void addRacingCar(const shared_ptr<RacingCar>& racingcar);
 
         // Functions handling display, input and movement of entities and world
@@ -48,7 +48,7 @@ namespace road_fighter {
         void checkCollisions();
 
         // Creating of bullets for shooting and entity cleanup
-        void spawnBullet(shared_ptr<Entity> entity);
+        void spawnBullet(const shared_ptr<Bullet>& entity);
         void cleanEntities();
 
         // Virtual function for displaying the world (implemented by SFML)
@@ -58,15 +58,15 @@ namespace road_fighter {
 
         // Getter for when game ends (no collision control for player when game ends)
         bool isGameEnd() const;
-        double getPositionScore();
+        double getPositionScore() const;
 
 
     private:
         vector<shared_ptr<Score>> observers;    // List of observers
         vector<shared_ptr<Entity>> entities;    // List of other entities
         unique_ptr<PlayerCar> player;           // Points to the player
-        double length;
-        bool gameEnd;
+        double length;                          // Level length
+        bool gameEnd;                           // Set if game ends
     };
 }
 

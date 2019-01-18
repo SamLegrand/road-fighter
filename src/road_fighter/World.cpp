@@ -16,8 +16,12 @@ void World::addObserver(const shared_ptr<Score>& observer) {
     observers.emplace_back(observer);
 }
 
-void World::addEntity(shared_ptr<road_fighter::Entity> entity) {
+void World::addEntity(const shared_ptr<road_fighter::Entity>& entity) {
     entities.emplace_back(entity);
+}
+
+void World::addEntityFront(const shared_ptr<road_fighter::Entity>& entity) {
+    entities.insert(entities.begin(), entity);
 }
 
 void World::draw() {
@@ -178,7 +182,7 @@ bool World::areColliding(const road_fighter::Entity &e1, const road_fighter::Ent
         || e1.getXPos() + e1.getWidth() < e2.getXPos() || e1.getXPos() > e2.getXPos() + e2.getWidth()));
 }
 
-void World::addPassableCar(shared_ptr<road_fighter::Entity> entity) {
+void World::addPassableCar(const shared_ptr<road_fighter::PassableCar>& entity) {
     unsigned int counter = 0;
     for (const shared_ptr<Entity>& e : entities) {
         if (e->getType() == "Taxi" || e->getType() == "Truck") {
@@ -217,7 +221,7 @@ void World::addPassableCar(shared_ptr<road_fighter::Entity> entity) {
     addEntity(entity);
 }
 
-void World::spawnBullet(shared_ptr<Entity> entity) {
+void World::spawnBullet(const shared_ptr<Bullet>& entity) {
     // Spawn bullet in front of the player
     if (player->canShoot()) {
         entity->updatePos(player->getXPos() + player->getWidth()/2 - entity->getWidth()/2, player->getYPos() - entity->getHeight());
@@ -301,7 +305,7 @@ bool World::isGameEnd() const {
     return gameEnd;
 }
 
-double World::getPositionScore() {
+double World::getPositionScore() const {
     // Count how many RacingCars are positioned above the player (to determine position)
     unsigned int position = 1;
     for (const shared_ptr<Entity>& entity : entities) {

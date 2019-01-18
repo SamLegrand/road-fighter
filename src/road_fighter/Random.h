@@ -22,7 +22,7 @@ namespace road_fighter {
         void operator=(Random const&)  = delete;
 
         // Returns a random double between lowerBound and upperBound
-        double getRandom(const double& lowerBound, const double& upperBound);
+        double getRandom(const double& lowerBound, const double& upperBound) const;
 
     private:
         // Private constructor (only constructed once)
