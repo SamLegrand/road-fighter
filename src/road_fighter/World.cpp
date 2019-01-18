@@ -6,28 +6,18 @@
 
 using namespace road_fighter;
 
-World::World() : Entity(8, 6) {
+World::World() : Entity(8, 6), gameEnd(false) {
     xPos = -4;
     yPos = -3;
     type = "World";
-    gameEnd = false;
 }
 
 void World::addObserver(const shared_ptr<Score>& observer) {
     observers.emplace_back(observer);
 }
 
-void World::removeObserver(const shared_ptr<Score>& observer) {
-    // Move element to end of vector, then erase it
-    observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
-}
-
 void World::addEntity(shared_ptr<road_fighter::Entity> entity) {
     entities.emplace_back(entity);
-}
-
-void World::removeEntity(const shared_ptr<road_fighter::Entity> &entity) {
-    entities.erase(std::remove(entities.begin(), entities.end(), entity), entities.end());
 }
 
 void World::draw() {
@@ -42,6 +32,7 @@ void World::draw() {
 }
 
 void World::handleInput() {
+    // Don't allow input when trying to drive below level start
     if (player->getMovementSpeed() <= 0 || yPos > -3) {
         player->handleInput();
     }
@@ -49,12 +40,10 @@ void World::handleInput() {
     else {
         player->moveUp();
     }
-    for (const shared_ptr<Entity>& e : entities) {
-        e->handleInput();
-    }
 }
 
 void World::handleMovement() {
+    // Handle all entity movements
     player->handleMovement();
     for (const shared_ptr<Entity>& e : entities) {
         e->handleMovement();
@@ -63,23 +52,26 @@ void World::handleMovement() {
     if (movementSpeed != 0 && yPos >= -3 && yPos - 5 <= length) {
         scrollWorld(movementSpeed);
     }
+    // Stop movement when game ends
     if (yPos - player->getHeight() > length && !gameEnd) {
         gameEnd = true;
         notifyObservers(getPositionScore());
         notifyObservers("GameEnd");
     }
+    // Don't allow driving below start of level
     if (yPos < -3) {
         yPos = -3;
     }
 }
 
 void World::scrollWorld(const double& speed) {
+    // Scroll all objects in relation to player
     for (const shared_ptr<Entity>& e : entities) {
         e->scroll(speed);
     }
     scroll(speed);
     if (!gameEnd) {
-        notifyObservers(-speed*2);
+        notifyObservers(-speed*2);  // Gain points for driving
     }
 }
 
@@ -93,7 +85,7 @@ void World::checkCollisions() {
         if (entities[i]->getType() == "Ammo" && !gameEnd) {
             if (areColliding(*player, *entities[i])) {
                 if (!player->hasMaxAmmo()) {
-                    player->addBullets();
+                    player->addBullets();   // Pick up ammo
                     toErase.insert(i);
                 }
             }
@@ -101,19 +93,18 @@ void World::checkCollisions() {
         if (entities[i]->getType() == "Bullet" && !gameEnd) {
             for (size_t j = 0; j < entities.size(); ++j) {
                 if (entities[i] != entities[j] && areColliding(*entities[i], *entities[j])) {
-//                    cout << entities[i]->getType() << " colliding with " << entities[j]->getType() << endl;
-                    if (entities[j]->getType() == "RacingCar") {
-                        shared_ptr<RacingCar> r = dynamic_pointer_cast<RacingCar>(entities[j]);
-                        r->setSpeed(0);
-                    }
-                    if (entities[j]->getType() == "Ammo") {
+                    if (entities[j]->getType() == "Ammo") { // No collision with ammo
                         continue;
                     }
-                    else {
-                        toErase.insert(j);
-                        notifyObservers(200);
+                    if (entities[j]->getType() == "RacingCar") {
+                        shared_ptr<RacingCar> r = dynamic_pointer_cast<RacingCar>(entities[j]);
+                        r->setSpeed(0); // Slow down RacingCar
                     }
-                    toErase.insert(i);
+                    else {
+                        toErase.insert(j);  // Remove other cars
+                        notifyObservers(200);   // Add 200 points
+                    }
+                    toErase.insert(i);  // Remove the bullet
                 }
             }
         }
@@ -121,7 +112,7 @@ void World::checkCollisions() {
             shared_ptr<RacingCar> r = dynamic_pointer_cast<RacingCar>(entities[i]);
             if (areColliding(*r, *player) && !gameEnd) {
                 if (r->getYPos() < player->getYPos()) {
-                    r->setSpeed(-0.02);
+                    r->setSpeed(-0.02); // Bounce
                 }
                 else {
                     r->setSpeed(0.01);
@@ -129,11 +120,10 @@ void World::checkCollisions() {
             }
             for (const shared_ptr<Entity>& e : entities) {
                 if (entities[i] != e && areColliding(*entities[i], *e)) {
-//                    cout << entities[i]->getType() << " colliding with " << e->getType() << endl;
                     if (e->getType() == "Truck") {
                         r->setMotorDisabled(60);
                         if (r->getYPos() < e->getYPos()) {
-                            r->setSpeed(-0.06);
+                            r->setSpeed(-0.06); // Bounce
                         }
                         else {
                             r->setSpeed(0.02);
@@ -141,7 +131,7 @@ void World::checkCollisions() {
                     }
                     if (e->getType() == "Taxi" || e->getType() == "RacingCar") {
                         if (r->getYPos() < e->getYPos()) {
-                            r->setSpeed(-0.04);
+                            r->setSpeed(-0.04); // Bounce
                         }
                         else {
                             r->setSpeed(0.01);
@@ -157,12 +147,11 @@ void World::checkCollisions() {
     if (!gameEnd) {
         for (const shared_ptr<Entity>& e : entities) {
             if (areColliding(*player, *e)) {
-//                cout << "Player colliding with " << e->getType() << endl;
                 if (e->getType() == "Truck") {
-                    notifyObservers(-200);
-                    player->setMotorDisabled(60);
+                    notifyObservers(-200);  // Remove 200 points
+                    player->setMotorDisabled(60);   // Disable motor for one second
                     if (player->getYPos() < e->getYPos()) {
-                        player->setSpeed(-0.06);
+                        player->setSpeed(-0.06);    // Bounce
                     }
                     else {
                         player->setSpeed(0.02);
@@ -171,7 +160,7 @@ void World::checkCollisions() {
                 if (e->getType() == "Taxi" || e->getType() == "RacingCar") {
                     notifyObservers(-100);
                     if (player->getYPos() < e->getYPos()) {
-                        player->setSpeed(-0.04);
+                        player->setSpeed(-0.04);    // Bounce
                     }
                     else {
                         player->setSpeed(0.01);
@@ -221,6 +210,7 @@ void World::addPassableCar(shared_ptr<road_fighter::Entity> entity) {
             }
         }
     }
+    // Don't spawn cars when the player is almost standing still
     if (player->getMovementSpeed() > 0.01) {
         return;
     }
@@ -228,20 +218,23 @@ void World::addPassableCar(shared_ptr<road_fighter::Entity> entity) {
 }
 
 void World::spawnBullet(shared_ptr<Entity> entity) {
+    // Spawn bullet in front of the player
     if (player->canShoot()) {
         entity->updatePos(player->getXPos() + player->getWidth()/2 - entity->getWidth()/2, player->getYPos() - entity->getHeight());
+        // Make sure bullet is not colliding
         for (const shared_ptr<Entity>& e : entities) {
             if (areColliding(*entity, *e)) {
                 return;
             }
         }
         addEntity(entity);
-        player->setBlockShoot(true);
+        player->setBlockShoot(true);    // Ensure space is released before next bullet spawn
         player->useBullet();
     }
 }
 
 void World::cleanEntities() {
+    // Removes entities when they have strayed far from the player
     for (size_t i = 0; i < entities.size();) {
         if (entities[i]->getType() == "Bullet") {
             if (entities[i]->getYPos() + entities[i]->getHeight() < -3) {
@@ -260,16 +253,22 @@ void World::cleanEntities() {
 }
 
 void World::notifyObservers(const double& scoreChange) {
+    // Notify all observers of score change
     for (const shared_ptr<Score>& observer : observers) {
         observer->update(scoreChange);
     }
 }
 
 void World::addRacingCar(const shared_ptr<RacingCar>& racingcar) {
+    // Make sure RacingCars are not colliding with anything on spawn!
     bool colliding = true;
-    while (areColliding(*racingcar, *player) || colliding) {
+    while (colliding) {
         colliding = false;
         racingcar->updatePos(Random::getInstance().getRandom(leftBound, rightBound - racingcar->getWidth()), Random::getInstance().getRandom(-3, 3));
+        if (areColliding(*racingcar, *player)) {
+            colliding = true;
+            continue;
+        }
         for (const shared_ptr<Entity>& e : entities) {
             if (e->getType() == "RacingCar") {
                 if (areColliding(*racingcar, *e)) {
@@ -279,6 +278,7 @@ void World::addRacingCar(const shared_ptr<RacingCar>& racingcar) {
             }
         }
     }
+    // Add RacingCar to world
     entities.emplace_back(racingcar);
 }
 
@@ -291,6 +291,7 @@ double World::getLength() const {
 }
 
 void World::notifyObservers(const string &event) {
+    // Notify all observers of event
     for (const shared_ptr<Score>& observer : observers) {
         observer->update(event);
     }
@@ -301,6 +302,7 @@ bool World::isGameEnd() const {
 }
 
 double World::getPositionScore() {
+    // Count how many RacingCars are positioned above the player (to determine position)
     unsigned int position = 1;
     for (const shared_ptr<Entity>& entity : entities) {
         if (entity->getType() == "RacingCar") {
@@ -309,10 +311,11 @@ double World::getPositionScore() {
             }
         }
     }
+    // Return correct score for finish position
     switch(position) {
         default: return 0;
-        case 1: return 1000;
-        case 2: return 600;
-        case 3: return 300;
+        case 1: return 2000;
+        case 2: return 1000;
+        case 3: return 500;
     }
 }

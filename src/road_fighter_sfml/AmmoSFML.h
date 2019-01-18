@@ -12,12 +12,14 @@
 namespace road_fighter_SFML {
     class AmmoSFML : public road_fighter::Ammo {
     public:
+        // Constructors
         AmmoSFML();
         AmmoSFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Display and input functions
         void draw() override;
         void handleInput() override {};
+
     private:
         sf::Texture texture;    // Texture
         sf::Sprite sprite;      // Sprite to render

@@ -22,7 +22,7 @@ AmmoSFML::AmmoSFML(const shared_ptr<sf::RenderWindow> &w) : AmmoSFML() {
 }
 
 void AmmoSFML::draw() {
-    // Don't execute draw calls when bullet is not on screen
+    // Don't execute draw calls when ammo is not on screen
     if (yPos + height >= -3 && yPos <= 3) {
         HelperSFML::getInstance().setSpritePosition(sprite, xPos, yPos);
         window->draw(sprite);

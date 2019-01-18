@@ -6,23 +6,18 @@
 
 using namespace road_fighter;
 
-PlayerCar::PlayerCar() : Entity(0.4, 0.8) {
-    speedX = 0;
-    speedY = 0;
-    blockShoot = false;
-    motorDisabledTime = 0;
-    bulletCount = 5;
-    bulletCapacity = 20;
-}
+PlayerCar::PlayerCar() : Entity(0.4, 0.8), speedX(0), speedY(0), blockShoot(false), motorDisabledTime(0),
+                        bulletCount(5), bulletCapacity(20) {}
 
 void PlayerCar::handleMovement() {
     double x = getXPos();
     double y = getYPos();
+    // Keep car within legal area
     if (x + speedX > leftBound && x + speedX + width < rightBound) {
         updatePos(x + speedX, y);
     }
     else {
-        speedX /= -2;
+        speedX /= -2;   // Bounce from sides
     }
     if (prevSpeedX == speedX) {
         notMovingX = true;
@@ -31,10 +26,10 @@ void PlayerCar::handleMovement() {
         notMovingY = true;
     }
     if (notMovingX) {
-        speedX *= 0.93;
+        speedX *= 0.93; // Slowdown
     }
     if (notMovingY) {
-        speedY *= 0.97;
+        speedY *= 0.97; // Slowdown
     }
     if (motorDisabledTime > 0) {
         motorDisabledTime--;
@@ -104,6 +99,7 @@ void PlayerCar::useBullet() {
 }
 
 void PlayerCar::addBullets() {
+    // Adds bullets until max capacity
     if (bulletCount < bulletCapacity) {
         bulletCount += 5;
         if (bulletCount > bulletCapacity) {

@@ -6,8 +6,7 @@
 
 using namespace road_fighter;
 
-Bullet::Bullet(const double &width, const double &height) : Entity(width, height) {
-    speed = -0.12;
+Bullet::Bullet(const double &width, const double &height) : Entity(width, height), speed(-0.12) {
     type = "Bullet";
 };
 

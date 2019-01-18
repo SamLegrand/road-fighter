@@ -7,9 +7,11 @@
 using namespace road_fighter_SFML;
 
 void GameSFML::handleInput() {
+    // Spawn bullet when space is pressed
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         spawnBullet();
     }
+    // Handle all other input
     handleInputWorld();
 }
 

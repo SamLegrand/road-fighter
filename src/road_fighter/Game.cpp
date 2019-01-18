@@ -65,11 +65,11 @@ void Game::spawnAmmo() {
 
 // Execute all procedures necessary per tick
 void Game::executeTick() {
+    cleanEntities();
+    spawnAmmo();
+    spawnPassableCar();
     handleInput();
     handleMovement();
-    spawnPassableCar();
     checkCollisions();
-    cleanEntities();
     checkEnd();
-    spawnAmmo();
 }

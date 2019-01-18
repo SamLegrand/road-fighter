@@ -6,14 +6,12 @@
 
 using namespace road_fighter;
 
-RacingCar::RacingCar() : Entity(0.4, 0.8) {
-    speedX = 0;
-    speedY = 0;
-    motorDisabledTime = 0;
+RacingCar::RacingCar() : Entity(0.4, 0.8), speedX(0), speedY(0), motorDisabledTime(0) {
     type = "RacingCar";
 }
 
 void RacingCar::handleMovement() {
+    // Handles random movement of RacingCar
     double d = Random::getInstance().getRandom(0, 1);
     if (d < 2/3.0) {
         if (d < 1/3.0) {
@@ -28,11 +26,12 @@ void RacingCar::handleMovement() {
     }
     double x = getXPos();
     double y = getYPos();
+    // Keep car within legal area
     if (x + speedX > leftBound && x + speedX + width < rightBound) {
         updatePos(x + speedX, y + speedY);
     }
     else {
-        speedX = -speedX/2;
+        speedX = -speedX/2; // Bounce from sides
     }
     if (prevSpeedX == speedX) {
         notMovingX = true;
@@ -41,10 +40,10 @@ void RacingCar::handleMovement() {
         notMovingY = true;
     }
     if (notMovingX) {
-        speedX *= 0.93;
+        speedX *= 0.93; // Slow down
     }
     if (notMovingY) {
-        speedY *= 0.97;
+        speedY *= 0.97; // Slow down
     }
     if (motorDisabledTime > 0) {
         motorDisabledTime--;

@@ -13,7 +13,7 @@ PlayerCarSFML::PlayerCarSFML() : PlayerCar(), texture(sf::Texture()), sprite(sf:
     }
     sprite.setTexture(texture);
 
-    // Load and set all font data for score display
+    // Load and set all font data for bullet count display
     if (!font.loadFromFile("../graphics/Font.ttf"))
     {
         cerr << "Couldn't load font data." << endl;
@@ -33,7 +33,8 @@ PlayerCarSFML::PlayerCarSFML() : PlayerCar(), texture(sf::Texture()), sprite(sf:
 void PlayerCarSFML::draw() {
     HelperSFML::getInstance().setSpritePosition(sprite, xPos, yPos);
     window->draw(sprite);
-    if (getBulletCount() == getBulletCapacity()) {
+    // Displays correct bullet count (until max)
+    if (hasMaxAmmo()) {
         text.setString("Bullets: max");
     }
     else {
@@ -59,6 +60,7 @@ void PlayerCarSFML::handleInput() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         moveDown();
     }
+    // Ensures space is released before next bullet spawn
     if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))) {
         setBlockShoot(false);
     }

@@ -19,7 +19,7 @@ namespace road_fighter {
         void moveRight();
         void handleMovement() override;
 
-        // Speed control
+        // Speed control (for collisions)
         void setSpeed(const double& s);
         void setMotorDisabled(const unsigned int& time);
 

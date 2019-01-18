@@ -16,6 +16,7 @@ namespace road_fighter_SFML {
         RacingCarSFML();
         RacingCarSFML(const shared_ptr<sf::RenderWindow>& w);
 
+        // Display and input functions
         void draw() override;
         void handleInput() override {};
 

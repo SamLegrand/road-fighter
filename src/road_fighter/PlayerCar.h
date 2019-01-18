@@ -22,20 +22,18 @@ namespace road_fighter {
         // Information needed by world
         double getMovementSpeed() const;
         bool canShoot() const;
+        bool hasBullets() const;
+        unsigned int getBulletCapacity() const;
+        unsigned int getBulletCount() const;
+        bool hasMaxAmmo() const;
 
         // Setters needed for world
         // Handles when shooting and accelerating is allowed
         void setBlockShoot(const bool& b);
         void setSpeed(const double& s);
         void setMotorDisabled(const unsigned int& time);
-
-
-        bool hasBullets() const;
         void addBullets();
         void useBullet();
-        unsigned int getBulletCapacity() const;
-        unsigned int getBulletCount() const;
-        bool hasMaxAmmo() const;
 
     private:
         double speedX;  // Horizontal speed
