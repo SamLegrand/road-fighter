@@ -18,12 +18,12 @@ namespace road_fighter {
 class EntityFactory
 {
 public:
-        virtual shared_ptr<Bullet> createBullet() = 0;
-        virtual shared_ptr<PassableCar> createPassableCar() = 0;
-        virtual unique_ptr<PlayerCar> createPlayerCar() = 0;
-        virtual shared_ptr<RacingCar> createRacingCar() = 0;
-        virtual unique_ptr<World> createWorld() = 0;
-        virtual shared_ptr<Ammo> createAmmo() = 0;
+        virtual shared_ptr<Bullet> createBullet() const = 0;
+        virtual shared_ptr<PassableCar> createPassableCar() const = 0;
+        virtual unique_ptr<PlayerCar> createPlayerCar() const = 0;
+        virtual shared_ptr<RacingCar> createRacingCar() const = 0;
+        virtual unique_ptr<World> createWorld() const = 0;
+        virtual shared_ptr<Ammo> createAmmo() const = 0;
 };
 } // namespace road_fighter
 

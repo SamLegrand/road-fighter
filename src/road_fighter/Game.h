@@ -21,22 +21,29 @@ public:
         // Graphics
         void drawEntities();
 
-        // Input and movement
+        // Input
         virtual void handleInput() = 0;
         void handleInputWorld();
-        void handleMovement();
 
         // Entities
-        void spawnPassableCar();
         void spawnBullet();
+
+        // Execute all functions needed in one tick
+        void executeTick();
+
+private:
+        // Entities
+        void spawnPassableCar();
         void spawnAmmo();
         void cleanEntities();
         void checkCollisions();
 
-        void checkEnd();
-        void executeTick();
+        // Movement
+        void handleMovement();
 
-private:
+        // Checks if game needs to end
+        void checkEnd();
+
         shared_ptr<EntityFactory> factory; // Factory for entity creation
         unique_ptr<World> world;           // Game world
         bool gameEnd;

@@ -21,12 +21,12 @@ public:
         explicit EntityFactorySFML(const shared_ptr<sf::RenderWindow>& w);
 
         // Creator functions returning base class pointers
-        shared_ptr<road_fighter::Bullet> createBullet() override;
-        unique_ptr<road_fighter::PlayerCar> createPlayerCar() override;
-        shared_ptr<road_fighter::PassableCar> createPassableCar() override;
-        shared_ptr<road_fighter::RacingCar> createRacingCar() override;
-        unique_ptr<road_fighter::World> createWorld() override;
-        shared_ptr<road_fighter::Ammo> createAmmo() override;
+        shared_ptr<road_fighter::Bullet> createBullet() const override;
+        unique_ptr<road_fighter::PlayerCar> createPlayerCar() const override;
+        shared_ptr<road_fighter::PassableCar> createPassableCar() const override;
+        shared_ptr<road_fighter::RacingCar> createRacingCar() const override;
+        unique_ptr<road_fighter::World> createWorld() const override;
+        shared_ptr<road_fighter::Ammo> createAmmo() const override;
 
 private:
         shared_ptr<sf::RenderWindow> window; // Window to render to (for creating the objects)

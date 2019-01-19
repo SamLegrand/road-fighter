@@ -105,8 +105,6 @@ void PlayerCar::addBullets()
         }
 }
 
-unsigned int PlayerCar::getBulletCapacity() const { return bulletCapacity; }
-
 unsigned int PlayerCar::getBulletCount() const { return bulletCount; }
 
 bool PlayerCar::hasMaxAmmo() const { return bulletCapacity == bulletCount; }

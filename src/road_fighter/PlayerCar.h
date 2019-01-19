@@ -24,7 +24,6 @@ public:
         double getMovementSpeed() const;
         bool canShoot() const;
         bool hasBullets() const;
-        unsigned int getBulletCapacity() const;
         unsigned int getBulletCount() const;
         bool hasMaxAmmo() const;
 
