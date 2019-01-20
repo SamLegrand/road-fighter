@@ -1,5 +1,9 @@
 # Road Fighter C++
 A Road Fighter like game written in C++.
+Installation requirements: CMake 3.10 and SFML 2.4.2
+Binaries will be installed to /bin/, libraries to /lib/.
+Installation via CLion: open project and run 'build all'.
+Installation via command line: cmake ./ && make
 
 ## Guide
 ### Goal
